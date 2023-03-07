@@ -1,5 +1,18 @@
-import '@/styles/globals.css'
-
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import React from "react";
+import { AppProvider } from "../context/AppContext";
+import Navbar from "../components/Navbar";
+import "../styles/globalS.css";
+import Footer from "@/components/Footer";
+function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <AppProvider>
+        <Navbar />
+        <Component {...pageProps} />
+        <Footer />
+      </AppProvider>
+    </>
+  );
 }
+
+export default MyApp;
