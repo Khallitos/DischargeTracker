@@ -41,6 +41,7 @@ import {
   IS_USER_LOGGED_IN,
   IS_USER_LOGGED_OUT,
   SET_INITIALSTATE,
+  TOGGLE_SIDEBAR,
 } from "./actions";
 
 export const AppReducer = (state, action) => {
@@ -80,6 +81,13 @@ export const AppReducer = (state, action) => {
       showAlert: false,
       alertText: "",
       alertType: "",
+    };
+  }
+
+  if (action.type === TOGGLE_SIDEBAR) {
+    return {
+      ...state,
+      isSideBarReduce: !state.isSideBarReduce,
     };
   }
 
@@ -123,7 +131,7 @@ export const AppReducer = (state, action) => {
       ...state,
       showAlert: true,
       alertText: "Login successful",
-      alertType: "danger",
+      alertType: "success",
       username: action.payload.username,
     };
   }

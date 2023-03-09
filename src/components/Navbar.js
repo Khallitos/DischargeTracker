@@ -57,11 +57,11 @@ const MainBox = {
   // left: 0px;
 };
 const MenuDesign = {
-  display: {
-    lg: "none",
-    md: "none",
-    xl: "none",
-  },
+  // display: {
+  //   lg: "none",
+  //   md: "none",
+  //   xl: "none",
+  // },
 };
 
 const loginButtonDesign = {};
@@ -111,7 +111,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
-  const { username, logUserOff, token, setLocalStorage } = useAppContext();
+  const { username, logUserOff, token, setLocalStorage, toggleSideBar } =
+    useAppContext();
+
+  const reduceSideBar = () => {
+    toggleSideBar();
+  };
+
   const router = useRouter();
   const logoutUser = () => {
     logUserOff();
@@ -127,6 +133,7 @@ const Navbar = () => {
             rel="stylesheet"
           />
         </Head>
+        <MenuIcon sx={MenuDesign} onClick={reduceSideBar} />
         <Box sx={{ display: "flex" }}>
           <Link href="/">
             <Typography
@@ -187,7 +194,7 @@ const Navbar = () => {
               variant="outlined"
               onClick={() => router.push("/login")}
               sx={{
-                backgroundColor: "orange",
+                backgroundColor: "#24b4eb",
                 marginX: "30px",
                 fontWeight: "bold",
                 fontSize: "13px",

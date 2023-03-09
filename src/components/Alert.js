@@ -3,6 +3,13 @@ import React from "react";
 import { useAppContext } from "../context/AppContext";
 
 export default function Alert() {
+  const success = {
+    color: "green",
+  };
+
+  const danger = {
+    color: "red",
+  };
   const { alertType, alertText } = useAppContext();
-  return <Box className={`alert ${alertType}`}> {alertText}</Box>;
+  return <Box sx={alertType === "success" ? success : danger}>{alertText}</Box>;
 }

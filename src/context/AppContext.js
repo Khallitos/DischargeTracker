@@ -49,6 +49,7 @@ import {
   SET_LOADER,
   UNSET_USERNAME,
   SET_INITIALSTATE,
+  TOGGLE_SIDEBAR,
 } from "./actions";
 
 //https://kanmusic.onrender.com
@@ -79,6 +80,7 @@ const initialState = {
   PendingSongs: "",
   ApprovedSongs: "",
   totalDownloads: "",
+  isSideBarReduce: false,
 };
 
 export const AppContext = React.createContext();
@@ -110,6 +112,11 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem("email", email);
     localStorage.setItem("verified", verified);
     localStorage.setItem("isUserLoggedIn", isUserLoggedIn);
+  };
+
+  //toggle sidebar
+  const toggleSideBar = () => {
+    dispatch({ type: TOGGLE_SIDEBAR });
   };
   // logout User
   const logUserOff = () => {
@@ -172,7 +179,7 @@ export const AppProvider = ({ children }) => {
       const isUserLoggedIn = true;
       addUserToLocalStorage(username, token, email, verified, isUserLoggedIn);
       dispatch({ type: LOGIN_USER_SUCCESS, payload: { username } });
-      router.push("/user/dashboard");
+      router.push("/dashboard");
     } catch (error) {
       dispatch({
         type: LOGIN_USER_ERROR,
@@ -582,6 +589,7 @@ export const AppProvider = ({ children }) => {
         getAllTrendingSongs,
         getAllRandomSongs,
         setLocalStorage,
+        toggleSideBar,
       }}
     >
       {children}
