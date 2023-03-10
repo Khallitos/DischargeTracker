@@ -1,9 +1,8 @@
-import Navbar from "./Navbar";
-import Alert from "./Alert"
+import Alert from "./Alert";
 import DashboardNavs from "./DashboardNavs";
+import MogsForm from "./MogsForm";
+import ReceivingForm from "./ReceivingForm";
+import VesselForm from "./VesselForm";
+import Navbar from "./Navbar";
 
-export{
-    Navbar,
-    Alert, 
-    DashboardNavs
-}
+export { Navbar, Alert, DashboardNavs, MogsForm, ReceivingForm, VesselForm };
