@@ -254,7 +254,7 @@ const add = () => {
               </Typography>
               <Stepper
                 style={{ width: "100%" }}
-                activeStep="1"
+                activeStep={currentStep}
                 orientation="horizontal"
               >
                 <Step>

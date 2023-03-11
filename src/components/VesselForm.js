@@ -60,8 +60,8 @@ const VesselForm = () => {
         id="outlined-basic"
         label="Vessel Name"
         variant="outlined"
-        value={values.vesselName}
-        onChange={handleChange}
+        value={userData["vesselName"]}
+        onChange={(e)=>setUserData({...userData, "vesselName": e.target.value})}
       />
 
       {/* TYPE OF PRODUCT */}
@@ -153,7 +153,12 @@ const VesselForm = () => {
           ),
         }}
       /> */}
-      <Button onClick={()=>setStep(2)}>Next</Button>
+        <Box sx={{display:"flex",justifyContent:"flex-end"}}>
+          
+        <Button onClick={()=>setStep(2)}>Next</Button>
+        </Box>
+     
+    
     </Box>
   );
 };
