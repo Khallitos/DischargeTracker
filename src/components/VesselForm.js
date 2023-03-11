@@ -41,6 +41,13 @@ const VesselForm = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  const VesselValidation = (e) => {
+  if(!userData["vesselName"]){
+     return alert("enter vessel name")
+  }
+  setStep(2)
+  }
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       {/* NAME OF VESSEL */}
@@ -155,7 +162,7 @@ const VesselForm = () => {
       /> */}
         <Box sx={{display:"flex",justifyContent:"flex-end"}}>
           
-        <Button onClick={()=>setStep(2)}>Next</Button>
+        <Button onClick={VesselValidation}>Next</Button>
         </Box>
      
     
