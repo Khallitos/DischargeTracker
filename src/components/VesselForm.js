@@ -7,39 +7,42 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
-
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 const formText = {
-    fontSize: "100px",
-    width: "300px",
-    textColor: "white",
-  
-    backgroundColor: "white",
-  };
+  fontSize: "100px",
+  width: "300px",
+  textColor: "white",
 
-  const initialState = {
-    vesselName: "",
-    productType: "",
-    receivingTerminal: "",
-    arrivalDate: "",
-  };
+  backgroundColor: "white",
+};
+
+const initialState = {
+  vesselName: "",
+  productType: "",
+  receivingTerminal: "",
+  arrivalDate: "",
+};
 
 const VesselForm = () => {
-    const [values, setValues] = useState(initialState);
-      const { isSideBarReduce, toggleSideBar, showAlert } = useAppContext();
-    const [arrivalDate, setArrivalDate] = React.useState(dayjs(""));
+  const [values, setValues] = useState(initialState);
+  const { setStep,userData,setUserData,isSideBarReduce, toggleSideBar, showAlert } = useAppContext();
+  const [arrivalDate, setArrivalDate] = React.useState(dayjs(""));
 
-    const handleChange = (e) => {
-        setValues({ ...values, [e.target.name]: e.target.value });
-      };
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <Divider orientation="horizontal" />
-
-
-      <Divider orientation="horizontal" />
       {/* NAME OF VESSEL */}
       <Typography variant="p">
         Name of Vessel
@@ -150,6 +153,7 @@ const VesselForm = () => {
           ),
         }}
       /> */}
+      <Button onClick={()=>setStep(2)}>Next</Button>
     </Box>
   );
 };

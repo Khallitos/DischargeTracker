@@ -87,6 +87,9 @@ export const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
+  const [currentStep , setStep]= useState(1);
+  const [userData,setUserData] = useState([]);
+  const [finalData, setFinalData] = useState([])
   const router = useRouter();
 
   //set localstates
@@ -560,6 +563,12 @@ export const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         ...state,
+        currentStep,
+        setStep,
+        userData,
+        setUserData,
+        finalData,
+        setFinalData,
         EmptyErr,
         displayPasswordMismatchErr,
         setupUser,
