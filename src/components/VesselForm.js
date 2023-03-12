@@ -25,21 +25,24 @@ const formText = {
   backgroundColor: "white",
 };
 
-const initialState = {
-  vesselName: "",
-  productType: "",
-  receivingTerminal: "",
-  arrivalDate: "",
-};
+
 
 const VesselForm = () => {
-  const [values, setValues] = useState(initialState);
   const { setStep,userData,setUserData,isSideBarReduce, toggleSideBar, showAlert } = useAppContext();
-  const [arrivalDate, setArrivalDate] = React.useState(dayjs(""));
+  const [ArrivalDate, setArrivalDate] = React.useState(dayjs(""));
+  const [DepartureDate, setDepartureDate] = React.useState(dayjs(""));
 
-  const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
+  const vesselArrivalDate = (newValue) => {
+    setArrivalDate(newValue)
+    setUserData({...userData, "vesselArrivalDate":newValue})
+
+
+  }
+
+  const  vesselDepartureDate = (newValue) => {
+    setDepartureDate(newValue)
+    setUserData({...userData, "vesselDepartureDate":newValue})
+  }
 
   const VesselValidation = (e) => {
   if(!userData["vesselName"]){
@@ -81,11 +84,11 @@ const VesselForm = () => {
           </Typography>
         </Typography>
         <Select
-          value={values.productType}
-          onChange={handleChange}
+          value={userData["productType"]}
           displayEmpty
           name="productType"
           label="Product Type"
+          onChange={(e)=>setUserData({...userData, "productType": e.target.value})}
         >
           <MenuItem value="">
             <em>None</em>
@@ -107,9 +110,8 @@ const VesselForm = () => {
           </Typography>
         </Typography>
         <Select
-          value={values.receivingTerminal}
-          onChange={handleChange}
-          displayEmpty
+          value={userData["productType"]}
+          onChange={(e)=>setUserData({...userData, "receivingTerminal": e.target.value})}
           name="receivingTerminal"
           label="Receiving Terminal"
         >
@@ -117,7 +119,7 @@ const VesselForm = () => {
             <em>None</em>
           </MenuItem>
           <MenuItem value="ZEN TERMINALS">ZEN TERMINALS</MenuItem>
-          <MenuItem value="GHANSTOCK">GHANSTOCKs</MenuItem>
+          <MenuItem value="GHANSTOCK">GHANSTOCK</MenuItem>
           <MenuItem value="BLUEOCEAN">BLUEOCEAN</MenuItem>
           <MenuItem value="VIVO ENERGY">VIVO ENERGY</MenuItem>
           <MenuItem value="TOTAL ENERGY">TOTAL ENERGY</MenuItem>
@@ -134,9 +136,26 @@ const VesselForm = () => {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           sx={{ width: "300px" }}
-          value={arrivalDate}
-          name="arrivalDate"
-          onChange={(newValue) => setArrivalDate(newValue)}
+          value={ArrivalDate}
+          name="vesselArrivalDate"
+          onChange={vesselArrivalDate}
+        />
+      </LocalizationProvider>
+
+      
+     
+      <Typography variant="p">
+        Vessel Departure Date
+        <Typography component="span" sx={{ color: "red" }}>
+          *
+        </Typography>
+      </Typography>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker
+          sx={{ width: "300px" }}
+          value={DepartureDate}
+          name="vesselArrivalDate"
+          onChange={vesselDepartureDate}
         />
       </LocalizationProvider>
 
