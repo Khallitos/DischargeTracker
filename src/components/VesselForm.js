@@ -117,7 +117,7 @@ const VesselForm = () => {
             <em>None</em>
           </MenuItem>
           <MenuItem value="ZEN TERMINALS">ZEN TERMINALS</MenuItem>
-          <MenuItem value="GHANSTOCK">GHANSTOCK</MenuItem>
+          <MenuItem value="GHANSTOCK">GHANSTOCKs</MenuItem>
           <MenuItem value="BLUEOCEAN">BLUEOCEAN</MenuItem>
           <MenuItem value="VIVO ENERGY">VIVO ENERGY</MenuItem>
           <MenuItem value="TOTAL ENERGY">TOTAL ENERGY</MenuItem>
