@@ -40,6 +40,7 @@ const VesselForm = () => {
   const [ArrivalDate, setArrivalDate] = React.useState(dayjs(""));
   const [DepartureDate, setDepartureDate] = React.useState(dayjs(""));
   const [isBillofLading, setIsBillofLading] = useState(true);
+  const [isError, setIsError] = useState(false)
 
   const vesselArrivalDate = (newValue) => {
     setArrivalDate(newValue);
@@ -56,22 +57,54 @@ const VesselForm = () => {
   };
 
   const VesselValidation = (e) => {
-    if (!userData["vesselName"]) {
-      return alert("enter vessel name");
+    if (!userData["vesselName"] || !userData["productType"] || !userData["productType"] || !userData["receivingTerminal"] || !userData["vesselArrivalDate"] || !userData["vesselDepartureDate"] || !userData["BillOfLading"] || !userData["VesselGov"] || !userData["VesselDensity15"] || !userData["VesselGsv"]|| !userData["vesselMetricTonesVac"] || !userData["vesselMetricTonesAir"] || !userData["linePacking"] ) {
+       setIsError(true)
+      
     }
-    setStep(2);
+    else{
+      setStep(2);
+    }
+   
   };
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       {/* *************************************************************************NAME OF VESSEL***************************************************************************** */}
-      <Typography variant="p">
+      <Typography
+        variant="p"
+        sx={{
+          marginTop: "30px",
+          display:"flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          marginBotttom:"10px"
+        }}
+      >
+        VESSEL DETAILS
+        
+       
+      </Typography>
+      <Divider variant="horizontal" sx={{ borderBottomWidth: "20px" }} />
+{isError &&
+      <Typography variant="h6" sx={{marginTop:"10px", fontWeight:"bold",color:"red",  display:"flex",
+          justifyContent: "center",
+          alignItems: "center",autoFocus }}>
+      Please provide all details
+        <Typography component="span" sx={{ color: "red", marginBottom: "0px" }}>
+          *
+        </Typography>
+      </Typography>
+}
+
+        <Typography variant="p" sx={{marginTop:"10px"}}>
         Name of Vessel
         <Typography component="span" sx={{ color: "red", marginBottom: "0px" }}>
           *
         </Typography>
       </Typography>
-
+    
+     
       <TextField
         sx={formText}
         margin="normal"
@@ -171,7 +204,7 @@ const VesselForm = () => {
       >
         <DatePicker
           sx={{ width: "300px" }}
-          value={DepartureDate}
+          value={userData["vesselDepartureDate"]}
           name="vesselArrivalDate"
           onChange={vesselDepartureDate}
         />
@@ -364,6 +397,28 @@ const VesselForm = () => {
         value={userData["vesselMetricTonesAir"]}
         onChange={(e) =>
           setUserData({ ...userData, vesselMetricTonesAir: e.target.value })
+        }
+      />
+
+
+<Typography variant="p">
+        LINE PACKING DIFF (CMB)
+        <Typography component="span" sx={{ color: "red" }}>
+          *
+        </Typography>
+      </Typography>
+      <TextField
+        sx={formText}
+        margin="normal"
+        required
+        fullWidth
+        name="linePacking"
+        id="outlined-basic"
+        label="Line Packing Difference"
+        variant="outlined"
+        value={userData["linePacking"]}
+        onChange={(e) =>
+          setUserData({ ...userData, linePacking: e.target.value })
         }
       />
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
