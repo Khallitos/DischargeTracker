@@ -87,9 +87,9 @@ const VesselForm = () => {
       </Typography>
       <Divider variant="horizontal" sx={{ borderBottomWidth: "20px" }} />
 {isError &&
-      <Typography variant="h6" sx={{marginTop:"10px", fontWeight:"bold",color:"red",  display:"flex",
+      <Typography autoFocus variant="h6" sx={{marginTop:"10px", fontWeight:"bold",color:"red",  display:"flex",
           justifyContent: "center",
-          alignItems: "center",autoFocus }}>
+          alignItems: "center" }}>
       Please provide all details
         <Typography component="span" sx={{ color: "red", marginBottom: "0px" }}>
           *
