@@ -57,14 +57,15 @@ const VesselForm = () => {
   };
 
   const VesselValidation = (e) => {
-    if (!userData["vesselName"] || !userData["productType"] || !userData["productType"] || !userData["receivingTerminal"] || !userData["vesselArrivalDate"] || !userData["vesselDepartureDate"] || !userData["BillOfLading"] || !userData["VesselGov"] || !userData["VesselDensity15"] || !userData["VesselGsv"]|| !userData["vesselMetricTonesVac"] || !userData["vesselMetricTonesAir"] || !userData["linePacking"] ) {
-       setIsError(true)
+    // if (!userData["vesselName"] || !userData["productType"] || !userData["productType"] || !userData["receivingTerminal"] || !userData["vesselArrivalDate"] || !userData["vesselDepartureDate"] || !userData["BillOfLading"] || !userData["vesselGOV"] || !userData["vesselDensity15"] || !userData["vesselGSV"]|| !userData["vesselMetricTonesVAC"] || !userData["vesselMetricTonesAIR"] || !userData["linePacking"] ) {
+    //    setIsError(true)
       
-    }
-    else{
-      setStep(2);
-    }
+    // }
+    // else{
+    //   setStep(2);
+    // }
    
+    setStep(2);
   };
 
   return (
@@ -298,13 +299,13 @@ const VesselForm = () => {
         margin="normal"
         required
         fullWidth
-        name="VesselGov"
+        name="vesselGOV"
         id="outlined-basic"
-        label="Vessel Gov"
+        label="GOV"
         variant="outlined"
-        value={userData["VesselGov"]}
+        value={userData["vesselGOV"]}
         onChange={(e) =>
-          setUserData({ ...userData, VesselGov: e.target.value })
+          setUserData({ ...userData, vesselGOV: e.target.value })
         }
       />
 
@@ -320,13 +321,13 @@ const VesselForm = () => {
         margin="normal"
         required
         fullWidth
-        name="VesselDensity15"
+        name="vesselDensity15"
         id="outlined-basic"
         label="Density @15"
         variant="outlined"
-        value={userData["VesselDensity15"]}
+        value={userData["vesselDensity15"]}
         onChange={(e) =>
-          setUserData({ ...userData, VesselDensity15: e.target.value })
+          setUserData({ ...userData, vesselDensity15: e.target.value })
         }
       />
 
@@ -342,13 +343,13 @@ const VesselForm = () => {
         margin="normal"
         required
         fullWidth
-        name="VesselGsv"
+        name="vesselGSV"
         id="outlined-basic"
         label="GSV @15"
         variant="outlined"
-        value={userData["VesselGsv"]}
+        value={userData["vesselGSV"]}
         onChange={(e) =>
-          setUserData({ ...userData, VesselGsv: e.target.value })
+          setUserData({ ...userData, vesselGSV: e.target.value })
         }
       />
 
@@ -366,13 +367,13 @@ const VesselForm = () => {
         margin="normal"
         required
         fullWidth
-        name="vesselMetricTonesVac"
+        name="vesselMTVAC"
         id="outlined-basic"
         label="MT(VAC)"
         variant="outlined"
-        value={userData["vesselMetricTonesVac"]}
+        value={userData["vesselMTVAC"]}
         onChange={(e) =>
-          setUserData({ ...userData, vesselMetricTonesVac: e.target.value })
+          setUserData({ ...userData, vesselMTVAC: e.target.value })
         }
       />
 
@@ -390,13 +391,13 @@ const VesselForm = () => {
         margin="normal"
         required
         fullWidth
-        name="vesselMetricTonesAir"
+        name="vesselMTAIR"
         id="outlined-basic"
-        label="MT(Air)"
+        label="MT(AIR)"
         variant="outlined"
-        value={userData["vesselMetricTonesAir"]}
+        value={userData["vesselMTAIR"]}
         onChange={(e) =>
-          setUserData({ ...userData, vesselMetricTonesAir: e.target.value })
+          setUserData({ ...userData, vesselMTAIR: e.target.value })
         }
       />
 
