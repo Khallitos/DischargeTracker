@@ -7,6 +7,9 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 import Checkbox from "@mui/material/Checkbox";
 import {
   Button,
@@ -29,6 +32,7 @@ const formText = {
 };
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const VesselForm = () => {
+
   const {
     setStep,
     userData,
@@ -57,19 +61,21 @@ const VesselForm = () => {
   };
 
   const VesselValidation = (e) => {
-    // if (!userData["vesselName"] || !userData["productType"] || !userData["productType"] || !userData["receivingTerminal"] || !userData["vesselArrivalDate"] || !userData["vesselDepartureDate"] || !userData["BillOfLading"] || !userData["vesselGOV"] || !userData["vesselDensity15"] || !userData["vesselGSV"]|| !userData["vesselMetricTonesVAC"] || !userData["vesselMetricTonesAIR"] || !userData["linePacking"] ) {
-    //    setIsError(true)
-      
-    // }
-    // else{
-    //   setStep(2);
-    // }
+    if (!userData["vesselName"] || !userData["productType"] || !userData["productType"] || !userData["receivingTerminal"] || !userData["vesselArrivalDate"] || !userData["vesselDepartureDate"] || !userData["BillOfLading"] || !userData["vesselGOV"] || !userData["vesselDensity15"] || !userData["vesselGSV"]|| !userData["vesselMetricTonesVAC"] || !userData["vesselMetricTonesAIR"] || !userData["linePacking"] ) {
+      toast.error("Please enter all vessel details", {
+        position: toast.POSITION.TOP_LEFT
+      });
+    }
+    else{
+      setStep(2);
+    }
    
     setStep(2);
   };
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <ToastContainer />
       {/* *************************************************************************NAME OF VESSEL***************************************************************************** */}
       <Typography
         variant="p"
