@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { useAppContext } from "../context/AppContext";
-import { AccountCircle, Report, Terminal } from "@mui/icons-material";
-import dayjs from "dayjs";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import Checkbox from "@mui/material/Checkbox";
+import { ToastContainer, toast } from 'react-toastify';
 import {
   Button,
   FormControl,
@@ -28,18 +23,39 @@ const formText = {
   backgroundColor: "white",
 };
 const ReceivingForm = () => {
+  const mogsFormValidation  = () => {
+    if (
+      !cargoData["mogsFlowmeterReading"] ||
+      !cargoData["mogsTerminalDensity20"] ||
+      !cargoData["mogsTerminalVCF"] ||
+      !cargoData["receivingTerminalTemperature"] ||
+      !cargoData["mogsTerminalGSV20"] ||
+      !cargoData["mogsTerminalMTVAC20"] ||
+      !cargoData["receivingTerminalMTVAC"] ||
+      !cargoData["mogsTerminalMTAIR20"] 
+    ) {
+      toast.error("Please enter all MOGS Terminal details", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else {
+      addSingleCargoDetails({cargoData})
+      // toast.success("Submitted Successfully", {
+      //   position: toast.POSITION.TOP_RIGHT,
+      // });
+    }
+  };
   const {
     setStep,
-    userData,
-    setUserData,
+    cargoData,
+    setCargoData,
     isSideBarReduce,
     toggleSideBar,
     showAlert,
+    addSingleCargoDetails
   } = useAppContext();
-  const [isError, setIsError] = useState(false);
-
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <ToastContainer />
       {/* *************************************************************************RECEIVING TERMINAL***************************************************************************** */}
       <Typography
         variant="p"
@@ -55,28 +71,6 @@ const ReceivingForm = () => {
         MOGS TERMINAL DETAILS
       </Typography>
       <Divider variant="horizontal" sx={{ borderBottomWidth: "20px" }} />
-      {isError && (
-        <Typography
-          autoFocus
-          variant="h6"
-          sx={{
-            marginTop: "10px",
-            fontWeight: "bold",
-            color: "red",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          Please provide all details
-          <Typography
-            component="span"
-            sx={{ color: "red", marginBottom: "0px" }}
-          >
-            *
-          </Typography>
-        </Typography>
-      )}
   
 
 
@@ -96,9 +90,9 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="Flow meter reading"
         variant="outlined"
-        value={userData["mogsFlowmeterReading"]}
+        value={cargoData["mogsFlowmeterReading"]}
         onChange={(e) =>
-          setUserData({ ...userData, mogsFlowmeterReading: e.target.value })
+          setCargoData({ ...cargoData, mogsFlowmeterReading: e.target.value })
         }
       />
 
@@ -119,10 +113,10 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="Density "
         variant="outlined"
-        value={userData["mogsTerminalDensity20"]}
+        value={cargoData["mogsTerminalDensity20"]}
         onChange={(e) =>
-          setUserData({
-            ...userData,
+          setCargoData({
+            ...cargoData,
             mogsTerminalDensity20: e.target.value,
           })
         }
@@ -146,10 +140,10 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="VCF"
         variant="outlined"
-        value={userData["mogsTerminalVCF"]}
+        value={cargoData["mogsTerminalVCF"]}
         onChange={(e) =>
-          setUserData({
-            ...userData,
+          setCargoData({
+            ...cargoData,
             mogsTerminalVCF: e.target.value,
           })
         }
@@ -190,10 +184,10 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="MT VAC "
         variant="outlined"
-        value={userData["mogsTerminalGSV20"]}
+        value={cargoData["mogsTerminalGSV20"]}
         onChange={(e) =>
-          setUserData({
-            ...userData,
+          setCargoData({
+            ...cargoData,
             mogsTerminalGSV20: e.target.value,
           })
         }
@@ -218,10 +212,10 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="MT VAC "
         variant="outlined"
-        value={userData["mogsTerminalMTVAC20"]}
+        value={cargoData["mogsTerminalMTVAC20"]}
         onChange={(e) =>
-          setUserData({
-            ...userData,
+          setCargoData({
+            ...cargoData,
             mogsTerminalMTVAC20: e.target.value,
           })
         }
@@ -244,10 +238,10 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="MT VAC "
         variant="outlined"
-        value={userData["mogsTerminalMTAIR20"]}
+        value={cargoData["mogsTerminalMTAIR20"]}
         onChange={(e) =>
-          setUserData({
-            ...userData,
+          setCargoData({
+            ...cargoData,
             mogsTerminalMTAIR20: e.target.value,
           })
         }
@@ -255,7 +249,7 @@ const ReceivingForm = () => {
 
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
       <Button onClick={() => setStep(2)}>Back</Button>
-        <Button>Completed</Button>
+        <Button onClick={mogsFormValidation}>Completed</Button>
       </Box>
     </Box>
   );

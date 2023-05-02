@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { useAppContext } from "../context/AppContext";
-import { AccountCircle, Report, Terminal } from "@mui/icons-material";
-import dayjs from "dayjs";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import Checkbox from "@mui/material/Checkbox";
+import { ToastContainer, toast } from "react-toastify";
 import {
   Button,
   FormControl,
@@ -28,10 +23,31 @@ const formText = {
   backgroundColor: "white",
 };
 const ReceivingForm = () => {
+  const ReceivingFormValidation = () => {
+    if (
+      !cargoData["receivingTerminalGOV"] ||
+      !cargoData["receivingTerminalDensity"] ||
+      !cargoData["receivingTerminalWCF"] ||
+      !cargoData["receivingTerminalTemperature"] ||
+      !cargoData["receivingTerminalVCF"] ||
+      !cargoData["receivingTerminalGSV"] ||
+      !cargoData["receivingTerminalMTVAC"] ||
+      !cargoData["receivingTerminalMTAIR"] ||
+      !cargoData["receivingTerminalGSV20"] ||
+      !cargoData["receivingTerminalMTVAC20"] ||
+      !cargoData["receivingTerminalMTAIR20"]
+    ) {
+      toast.error("Please enter all Receiving Terminal details", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else {
+      setStep(3);
+    }
+  };
   const {
     setStep,
-    userData,
-    setUserData,
+    cargoData,
+    setCargoData,
     isSideBarReduce,
     toggleSideBar,
     showAlert,
@@ -40,6 +56,7 @@ const ReceivingForm = () => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <ToastContainer />
       {/* *************************************************************************RECEIVING TERMINAL***************************************************************************** */}
       <Typography
         variant="p"
@@ -55,7 +72,7 @@ const ReceivingForm = () => {
         RECEIVING TERMINAL DETAILS
       </Typography>
       <Divider variant="horizontal" sx={{ borderBottomWidth: "20px" }} />
-      {isError && (
+      {/* {isError && (
         <Typography
           autoFocus
           variant="h6"
@@ -76,7 +93,7 @@ const ReceivingForm = () => {
             *
           </Typography>
         </Typography>
-      )}
+      )} */}
       <Typography
         variant="p"
         sx={{
@@ -111,9 +128,9 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="GOV"
         variant="outlined"
-        value={userData["receivingTerminalGOV"]}
+        value={cargoData["receivingTerminalGOV"]}
         onChange={(e) =>
-          setUserData({ ...userData, receivingTerminalGOV: e.target.value })
+          setCargoData({ ...cargoData, receivingTerminalGOV: e.target.value })
         }
       />
 
@@ -134,9 +151,12 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="DENSITY @15"
         variant="outlined"
-        value={userData["receivingTerminalDensity"]}
+        value={cargoData["receivingTerminalDensity"]}
         onChange={(e) =>
-          setUserData({ ...userData, receivingTerminalDensity: e.target.value })
+          setCargoData({
+            ...cargoData,
+            receivingTerminalDensity: e.target.value,
+          })
         }
       />
 
@@ -157,9 +177,9 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="WCF"
         variant="outlined"
-        value={userData["receivingTerminalWCF"]}
+        value={cargoData["receivingTerminalWCF"]}
         onChange={(e) =>
-          setUserData({ ...userData, receivingTerminalWCF: e.target.value })
+          setCargoData({ ...cargoData, receivingTerminalWCF: e.target.value })
         }
       />
 
@@ -179,10 +199,10 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="AVERAGE TEMPERATURE"
         variant="outlined"
-        value={userData["receivingTerminalTemperature"]}
+        value={cargoData["receivingTerminalTemperature"]}
         onChange={(e) =>
-          setUserData({
-            ...userData,
+          setCargoData({
+            ...cargoData,
             receivingTerminalTemperature: e.target.value,
           })
         }
@@ -204,9 +224,9 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="VCF"
         variant="outlined"
-        value={userData["receivingTerminalVCF"]}
+        value={cargoData["receivingTerminalVCF"]}
         onChange={(e) =>
-          setUserData({ ...userData, receivingTerminalVCF: e.target.value })
+          setCargoData({ ...cargoData, receivingTerminalVCF: e.target.value })
         }
       />
 
@@ -226,9 +246,9 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="GSV"
         variant="outlined"
-        value={userData["receivingTerminalGSV"]}
+        value={cargoData["receivingTerminalGSV"]}
         onChange={(e) =>
-          setUserData({ ...userData, receivingTerminalGSV: e.target.value })
+          setCargoData({ ...cargoData, receivingTerminalGSV: e.target.value })
         }
       />
 
@@ -248,10 +268,10 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="MT VAC"
         variant="outlined"
-        value={userData["receivingTerminalMTVAC"]}
+        value={cargoData["receivingTerminalMTVAC"]}
         onChange={(e) =>
-          setUserData({
-            ...userData,
+          setCargoData({
+            ...cargoData,
             receivingTerminalMTVAC: e.target.value,
           })
         }
@@ -273,10 +293,10 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="MT AIR"
         variant="outlined"
-        value={userData["receivingTerminalMTAIR"]}
+        value={cargoData["receivingTerminalMTAIR"]}
         onChange={(e) =>
-          setUserData({
-            ...userData,
+          setCargoData({
+            ...cargoData,
             receivingTerminalMTAIR: e.target.value,
           })
         }
@@ -299,12 +319,9 @@ const ReceivingForm = () => {
       </Typography>
       <Divider variant="horizontal" sx={{ borderBottomWidth: "20px" }} />
 
-
-
-
       {/* *************************************************************************GSV @20***************************************************************************** */}
       <Typography variant="p" sx={{ marginTop: "10px" }}>
-      GSV @20
+        GSV @20
         <Typography component="span" sx={{ color: "red", marginBottom: "0px" }}>
           *
         </Typography>
@@ -318,20 +335,18 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="GSV "
         variant="outlined"
-        value={userData["receivingTerminalGSV20"]}
+        value={cargoData["receivingTerminalGSV20"]}
         onChange={(e) =>
-          setUserData({
-            ...userData,
+          setCargoData({
+            ...cargoData,
             receivingTerminalGSV20: e.target.value,
           })
         }
       />
 
-      
-
       {/* *************************************************************************MT VAC***************************************************************************** */}
       <Typography variant="p" sx={{ marginTop: "10px" }}>
-      MT VAC
+        MT VAC
         <Typography component="span" sx={{ color: "red", marginBottom: "0px" }}>
           *
         </Typography>
@@ -345,19 +360,18 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="MT VAC "
         variant="outlined"
-        value={userData["receivingTerminalMTVAC20"]}
+        value={cargoData["receivingTerminalMTVAC20"]}
         onChange={(e) =>
-          setUserData({
-            ...userData,
+          setCargoData({
+            ...cargoData,
             receivingTerminalMTVAC20: e.target.value,
           })
         }
       />
 
-
       {/* *************************************************************************MT AIR***************************************************************************** */}
       <Typography variant="p" sx={{ marginTop: "10px" }}>
-      MT AIR
+        MT AIR
         <Typography component="span" sx={{ color: "red", marginBottom: "0px" }}>
           *
         </Typography>
@@ -371,10 +385,10 @@ const ReceivingForm = () => {
         id="outlined-basic"
         label="MT VAC "
         variant="outlined"
-        value={userData["receivingTerminalMTAIR20"]}
+        value={cargoData["receivingTerminalMTAIR20"]}
         onChange={(e) =>
-          setUserData({
-            ...userData,
+          setCargoData({
+            ...cargoData,
             receivingTerminalMTAIR20: e.target.value,
           })
         }
@@ -382,7 +396,7 @@ const ReceivingForm = () => {
 
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Button onClick={() => setStep(1)}>Back</Button>
-        <Button onClick={() => setStep(3)}>Next</Button>
+        <Button onClick={ReceivingFormValidation}>Next</Button>
       </Box>
     </Box>
   );

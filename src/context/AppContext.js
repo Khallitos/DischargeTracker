@@ -88,10 +88,19 @@ export const AppContext = React.createContext();
 export const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const [currentStep , setStep]= useState(1);
-  const [userData,setUserData] = useState([]);
+  const [cargoData,setCargoData] = useState([]);
   const [finalData, setFinalData] = useState([])
   const router = useRouter();
 
+
+  // add single cargo detail
+
+  const addSingleCargoDetails = async({cargoData}) =>{
+    const { data } = await axios.post(
+      `http://localhost:6000/api/upload/uploadmusic`,
+      cargoData
+    );
+  }
   //set localstates
 
   const setLocalStorage = () => {
@@ -565,10 +574,11 @@ export const AppProvider = ({ children }) => {
         ...state,
         currentStep,
         setStep,
-        userData,
-        setUserData,
+        cargoData,
+        setCargoData,
         finalData,
         setFinalData,
+        addSingleCargoDetails,
         EmptyErr,
         displayPasswordMismatchErr,
         setupUser,
