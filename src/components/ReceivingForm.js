@@ -40,6 +40,7 @@ const ReceivingForm = () => {
       toast.error("Please enter all Receiving Terminal details", {
         position: toast.POSITION.TOP_RIGHT,
       });
+      setStep(3);
     } else {
       setStep(3);
     }

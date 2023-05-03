@@ -2,59 +2,15 @@ import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { nanoid } from "nanoid";
 
 const UploadSchema = new mongoose.Schema({
-  title: {
+  vesselName: {
     type: String,
+    required: [true, "Please provide a vessel name"],
     minlength: 3,
+    trim: true,
   },
-
-  description: {
-    type: String,
-    minlength: 3,
-  },
-
-  Genre: {
-    type: String,
-    minlength: 3,
-
-  },
-  artist: {
-    type: String,
-    minlength: 3,
-
-  },
-
-  Key: {
-    type: String,
-    minlength: 3,
-
-  },
-
-  Key1: {
-    type: String,
-    minlength: 3,
-  },
-
-  verified: {
-    type: Boolean,
-    default:false,
-  },
-
-
-  email: {
-    type: String,
-
-  },
-
-  downloadCount: {
-    type: Number,
-    default: 0,
-  },
-
-  username: {
-    type: String,
-  }
 });
 
-export default mongoose.model("Songs", UploadSchema);
+export default mongoose.model("cargoDetails", UploadSchema);

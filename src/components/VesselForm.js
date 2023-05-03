@@ -7,9 +7,9 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import Checkbox from "@mui/material/Checkbox";
 import {
   Button,
@@ -24,7 +24,7 @@ import {
 const formText = {
   fontSize: "100px",
   marginTop: "10px",
-  marginBottom:"20px",
+  marginBottom: "20px",
   width: "300px",
   textColor: "white",
 
@@ -32,7 +32,6 @@ const formText = {
 };
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const VesselForm = () => {
-
   const {
     setStep,
     cargoData,
@@ -61,40 +60,48 @@ const VesselForm = () => {
   };
 
   const VesselValidation = (e) => {
-    if (!cargoData["vesselName"] || !cargoData["productType"] || !cargoData["productType"] || !cargoData["receivingTerminal"] || !cargoData["vesselArrivalDate"] || !cargoData["vesselDepartureDate"] || !cargoData["BillOfLading"] || !cargoData["vesselGOV"] || !cargoData["vesselDensity15"] || !cargoData["vesselGSV"]|| !cargoData["vesselMetricTonesVAC"] || !cargoData["vesselMetricTonesAIR"] || !cargoData["linePacking"] ) {
+    if (
+      !cargoData["vesselName"] ||
+      !cargoData["productType"] ||
+      !cargoData["receivingTerminal"] ||
+      !cargoData["vesselArrivalDate"] ||
+      !cargoData["vesselDepartureDate"] ||
+      !cargoData["BillOfLading"] ||
+      !cargoData["vesselGOV"] ||
+      !cargoData["vesselDensity15"] ||
+      !cargoData["vesselGSV"] ||
+      !cargoData["vesselMetricTonesVAC"] ||
+      !cargoData["vesselMetricTonesAIR"] ||
+      !cargoData["linePacking"]
+    ) {
       toast.error("Please enter all vessel details", {
-        position: toast.POSITION.TOP_RIGHT
+        position: toast.POSITION.TOP_RIGHT,
       });
       setStep(2);
-    } 
-    else{
+    } else {
       setStep(2);
     }
-   
-    
   };
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <ToastContainer />
+      <ToastContainer />
       {/* *************************************************************************NAME OF VESSEL***************************************************************************** */}
       <Typography
         variant="p"
         sx={{
           marginTop: "30px",
-          display:"flex",
+          display: "flex",
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
-          marginBotttom:"10px"
+          marginBotttom: "10px",
         }}
       >
         VESSEL DETAILS
-        
-       
       </Typography>
       <Divider variant="horizontal" sx={{ borderBottomWidth: "20px" }} />
-{/* {isError &&
+      {/* {isError &&
       <Typography autoFocus variant="h6" sx={{marginTop:"10px", fontWeight:"bold",color:"red",  display:"flex",
           justifyContent: "center",
           alignItems: "center" }}>
@@ -105,14 +112,13 @@ const VesselForm = () => {
       </Typography>
 } */}
 
-        <Typography variant="p" sx={{marginTop:"10px"}}>
+      <Typography variant="p" sx={{ marginTop: "10px" }}>
         Name of Vessel
         <Typography component="span" sx={{ color: "red", marginBottom: "0px" }}>
           *
         </Typography>
       </Typography>
-    
-     
+
       <TextField
         sx={formText}
         margin="normal"
@@ -194,7 +200,7 @@ const VesselForm = () => {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           sx={{ width: "300px" }}
-          value= {cargoData["vesselArrivalDate"]}
+          value={cargoData["vesselArrivalDate"]}
           name="vesselArrivalDate"
           onChange={vesselArrivalDate}
         />
@@ -282,10 +288,10 @@ const VesselForm = () => {
         variant="p"
         sx={{
           marginTop: "30px",
-          display:"flex",
+          display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          width: "100%"
+          width: "100%",
         }}
       >
         ARRIVAL FIGURES
@@ -360,8 +366,6 @@ const VesselForm = () => {
         }
       />
 
-
-
       {/* *************************************************************************MT VAC ***************************************************************************** */}
       <Typography variant="p">
         MT(VAC)
@@ -384,8 +388,6 @@ const VesselForm = () => {
         }
       />
 
-
-      
       {/* *************************************************************************MT AIR ***************************************************************************** */}
       <Typography variant="p">
         MT(AIR)
@@ -408,8 +410,7 @@ const VesselForm = () => {
         }
       />
 
-
-<Typography variant="p">
+      <Typography variant="p">
         LINE PACKING DIFF (CMB)
         <Typography component="span" sx={{ color: "red" }}>
           *

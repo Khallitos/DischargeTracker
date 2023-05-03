@@ -28,10 +28,8 @@ const ReceivingForm = () => {
       !cargoData["mogsFlowmeterReading"] ||
       !cargoData["mogsTerminalDensity20"] ||
       !cargoData["mogsTerminalVCF"] ||
-      !cargoData["receivingTerminalTemperature"] ||
       !cargoData["mogsTerminalGSV20"] ||
       !cargoData["mogsTerminalMTVAC20"] ||
-      !cargoData["receivingTerminalMTVAC"] ||
       !cargoData["mogsTerminalMTAIR20"] 
     ) {
       toast.error("Please enter all MOGS Terminal details", {

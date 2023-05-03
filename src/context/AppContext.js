@@ -97,7 +97,7 @@ export const AppProvider = ({ children }) => {
 
   const addSingleCargoDetails = async({cargoData}) =>{
     const { data } = await axios.post(
-      `http://localhost:6000/api/upload/uploadmusic`,
+      `http://localhost:6000/api/v1/upload/singleCargoDetails`,
       cargoData
     );
   }
