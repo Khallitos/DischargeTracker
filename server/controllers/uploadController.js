@@ -7,6 +7,7 @@ import * as yup from 'yup';
 
 const cargoDetailsSchema = yup.object().shape({
   vesselName: yup.string().required().min(3).matches(/^[^<>]*$/, "Invalid characters: <, >"),
+  
 });
 
 // ADD SINGLE CARGO DETAILS
@@ -21,7 +22,7 @@ const singleCargoDetails = async (req, res) => {
 
     const { vesselName } = cargoDetails;
 
-    const insertCargoDetails = await Upload.create({ vesselName });
+    const insertCargoDetails = await Upload.create({ vesselName,cargoId });
 
     res.status(201).json(insertCargoDetails);
   } catch (error) {

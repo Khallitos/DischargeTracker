@@ -11,6 +11,10 @@ const UploadSchema = new mongoose.Schema({
     minlength: 3,
     trim: true,
   },
+
+  cargoId: {
+    type: String,
+  },
 });
 
 export default mongoose.model("cargoDetails", UploadSchema);
