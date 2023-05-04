@@ -14,7 +14,9 @@ import cors from "cors";
 
 const app = express();
 
-app.use(cors()); // Use this after the variable declaration
+app.use(cors({
+  origin: "*"
+})); // Use this after the variable declaration
 app.use(express.json({ limit: "10mb", extended: true }));
 app.use(
   express.urlencoded({ limit: "10mb", extended: true, parameterLimit: 50000 })
