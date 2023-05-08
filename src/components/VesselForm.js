@@ -9,8 +9,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import * as yup from 'yup';
 import { ToastContainer, toast } from "react-toastify";
-
-
 import "react-toastify/dist/ReactToastify.css";
 import Checkbox from "@mui/material/Checkbox";
 import {
@@ -22,7 +20,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
+import { vesselValidationSchema } from "./validations/vesselValidationSchema";
 const formText = {
   fontSize: "100px",
   marginTop: "10px",
@@ -67,8 +65,8 @@ const VesselForm = () => {
       vesselName: cargoData["vesselName"],
       productType: cargoData["productType"],
       receivingTerminal: cargoData["receivingTerminal"],
-      vesselArrivalDate: cargoData["vesselArrivalDate"],
-      vesselDepartureDate: cargoData["vesselDepartureDate"],
+      // vesselArrivalDate: cargoData["vesselArrivalDate"],
+      // vesselDepartureDate: cargoData["vesselDepartureDate"],
       BillOfLading: cargoData["BillOfLading"],
       vesselGOV: cargoData["vesselGOV"],
       vesselDensity15: cargoData["vesselDensity15"],
@@ -80,7 +78,7 @@ const VesselForm = () => {
    
     console.log(vesselFormData)
 
-    const isValid = await vesselSchema.isValid(vesselFormdata)
+    const isValid = await vesselValidationSchema.isValid(vesselFormData)
     console.log(isValid)
     if(isValid){
       setStep(2);
@@ -230,7 +228,7 @@ const VesselForm = () => {
         <DatePicker
           sx={{ width: "300px" }}
           value={cargoData["vesselDepartureDate"]}
-          name="vesselArrivalDate"
+          name="vesselDepartureDate"
           onChange={vesselDepartureDate}
         />
       </LocalizationProvider>
@@ -389,13 +387,13 @@ const VesselForm = () => {
         margin="normal"
         required
         fullWidth
-        name="vesselMTVAC"
+        name="vesselMetricTonesVAC"
         id="outlined-basic"
         label="MT(VAC)"
         variant="outlined"
-        value={cargoData["vesselMTVAC"]}
+        value={cargoData["vesselMetricTonesVAC"]}
         onChange={(e) =>
-          setCargoData({ ...cargoData, vesselMTVAC: e.target.value })
+          setCargoData({ ...cargoData, vesselMetricTonesVAC: e.target.value })
         }
       />
 
@@ -411,13 +409,13 @@ const VesselForm = () => {
         margin="normal"
         required
         fullWidth
-        name="vesselMTAIR"
+        name="vesselMetricTonesAIR"
         id="outlined-basic"
         label="MT(AIR)"
         variant="outlined"
-        value={cargoData["vesselMTAIR"]}
+        value={cargoData["vesselMetricTonesAIR"]}
         onChange={(e) =>
-          setCargoData({ ...cargoData, vesselMTAIR: e.target.value })
+          setCargoData({ ...cargoData, vesselMetricTonesAIR: e.target.value })
         }
       />
 
