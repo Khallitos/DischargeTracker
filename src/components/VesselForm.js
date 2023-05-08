@@ -7,7 +7,9 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import * as yup from 'yup';
 import { ToastContainer, toast } from "react-toastify";
+
 
 import "react-toastify/dist/ReactToastify.css";
 import Checkbox from "@mui/material/Checkbox";
@@ -59,28 +61,37 @@ const VesselForm = () => {
     setCargoData({ ...cargoData, BillOfLading: "N/A" });
   };
 
-  const VesselValidation = (e) => {
-    if (
-      !cargoData["vesselName"] ||
-      !cargoData["productType"] ||
-      !cargoData["receivingTerminal"] ||
-      !cargoData["vesselArrivalDate"] ||
-      !cargoData["vesselDepartureDate"] ||
-      !cargoData["BillOfLading"] ||
-      !cargoData["vesselGOV"] ||
-      !cargoData["vesselDensity15"] ||
-      !cargoData["vesselGSV"] ||
-      !cargoData["vesselMetricTonesVAC"] ||
-      !cargoData["vesselMetricTonesAIR"] ||
-      !cargoData["linePacking"]
-    ) {
-      toast.error("Please enter all vessel details", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-      setStep(2);
-    } else {
+  const VesselValidation = async(e) => {
+
+    let vesselFormData = {
+      vesselName: cargoData["vesselName"],
+      productType: cargoData["productType"],
+      receivingTerminal: cargoData["receivingTerminal"],
+      vesselArrivalDate: cargoData["vesselArrivalDate"],
+      vesselDepartureDate: cargoData["vesselDepartureDate"],
+      BillOfLading: cargoData["BillOfLading"],
+      vesselGOV: cargoData["vesselGOV"],
+      vesselDensity15: cargoData["vesselDensity15"],
+      vesselGSV: cargoData["vesselGSV"],
+      vesselMetricTonesVAC: cargoData["vesselMetricTonesVAC"],
+      vesselMetricTonesAIR: cargoData["vesselMetricTonesAIR"],
+      linePacking: cargoData["linePacking"],
+    }
+   
+    console.log(vesselFormData)
+
+    const isValid = await vesselSchema.isValid(vesselFormdata)
+    console.log(isValid)
+    if(isValid){
       setStep(2);
     }
+    else{
+      toast.error("Please fill the data with valid credentials", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    
+  
+  }
   };
 
   return (
