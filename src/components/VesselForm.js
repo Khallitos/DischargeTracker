@@ -1,13 +1,9 @@
 import React, { useState } from "react";
+import * as yup from "yup";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { useAppContext } from "../context/AppContext";
-import { AccountCircle, Report, Terminal } from "@mui/icons-material";
-import dayjs from "dayjs";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import * as yup from 'yup';
+import { AccountCircle, Height, Report, Terminal } from "@mui/icons-material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Checkbox from "@mui/material/Checkbox";
@@ -27,10 +23,11 @@ const formText = {
   marginBottom: "20px",
   width: "300px",
   textColor: "white",
-
   backgroundColor: "white",
 };
+
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
 const VesselForm = () => {
   const {
     setStep,
@@ -40,33 +37,22 @@ const VesselForm = () => {
     toggleSideBar,
     showAlert,
   } = useAppContext();
-  const [ArrivalDate, setArrivalDate] = React.useState(dayjs(""));
-  const [DepartureDate, setDepartureDate] = React.useState(dayjs(""));
+
   const [isBillofLading, setIsBillofLading] = useState(true);
-  // const [isError, setIsError] = useState(false)
 
-  const vesselArrivalDate = (newValue) => {
-    setArrivalDate(newValue);
-    setCargoData({ ...cargoData, vesselArrivalDate: newValue });
-  };
 
-  const vesselDepartureDate = (newValue) => {
-    setDepartureDate(newValue);
-    setCargoData({ ...cargoData, vesselDepartureDate: newValue });
-  };
   const BillCheckBox = () => {
     setIsBillofLading(!isBillofLading);
     setCargoData({ ...cargoData, BillOfLading: "N/A" });
   };
 
-  const VesselValidation = async(e) => {
-
+  const VesselValidation = async (e) => {
     let vesselFormData = {
       vesselName: cargoData["vesselName"],
       productType: cargoData["productType"],
       receivingTerminal: cargoData["receivingTerminal"],
-      // vesselArrivalDate: cargoData["vesselArrivalDate"],
-      // vesselDepartureDate: cargoData["vesselDepartureDate"],
+      vesselArrivalDate: cargoData["vesselArrivalDate"],
+      vesselDepartureDate: cargoData["vesselDepartureDate"],
       BillOfLading: cargoData["BillOfLading"],
       vesselGOV: cargoData["vesselGOV"],
       vesselDensity15: cargoData["vesselDensity15"],
@@ -74,22 +60,19 @@ const VesselForm = () => {
       vesselMetricTonesVAC: cargoData["vesselMetricTonesVAC"],
       vesselMetricTonesAIR: cargoData["vesselMetricTonesAIR"],
       linePacking: cargoData["linePacking"],
-    }
-   
-    console.log(vesselFormData)
+    };
 
-    const isValid = await vesselValidationSchema.isValid(vesselFormData)
-    console.log(isValid)
-    if(isValid){
+    console.log(vesselFormData);
+
+    const isValid = await vesselValidationSchema.isValid(vesselFormData);
+    console.log(isValid);
+    if (isValid) {
       setStep(2);
-    }
-    else{
+    } else {
       toast.error("Please fill the data with valid credentials", {
         position: toast.POSITION.TOP_RIGHT,
       });
-    
-  
-  }
+    }
   };
 
   return (
@@ -206,53 +189,24 @@ const VesselForm = () => {
           *
         </Typography>
       </Typography>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
-          sx={{ width: "300px" }}
-          value={cargoData["vesselArrivalDate"]}
-          name="vesselArrivalDate"
-          onChange={vesselArrivalDate}
-        />
-      </LocalizationProvider>
-      {/* *************************************************************************VESSEL DEPARTURE***************************************************************************** */}
-      <Typography variant="p">
-        Vessel Departure Date
-        <Typography component="span" sx={{ color: "red" }}>
-          *
-        </Typography>
-      </Typography>
-      <LocalizationProvider
-        dateAdapter={AdapterDayjs}
-        sx={{ marginBottom: "20px" }}
-      >
-        <DatePicker
-          sx={{ width: "300px" }}
-          value={cargoData["vesselDepartureDate"]}
-          name="vesselDepartureDate"
-          onChange={vesselDepartureDate}
-        />
-      </LocalizationProvider>
 
-      {/* <TextField
+      <TextField
         sx={formText}
         margin="normal"
         required
         fullWidth
-        name="username"
-        id="outlined-basic"
-        label="Username"
+        name="vesselArrivalDate"
+        id="vesselArrivalDate"
+        label="Vessel Arrival Date"
         variant="outlined"
-        value={values.username}
-        autoComplete="username"
-        onChange={handleChange}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <AccountCircle />
-            </InputAdornment>
-          ),
-        }}
-      /> */}
+        type="date" // set type to "date"
+        InputLabelProps={{ shrink: true }} // to shrink the label when the input is not empty
+        value={cargoData["vesselArrivalDate"]}
+        onChange={(e) =>
+          setCargoData({ ...cargoData, vesselArrivalDate: e.target.value })
+        }
+      />
+      {/* *************************************************************************VESSEL DEPARTURE***************************************************************************** */}
 
       {/* *************************************************************************BILL OF LADING***************************************************************************** */}
 
