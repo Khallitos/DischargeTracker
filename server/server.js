@@ -22,7 +22,7 @@ app.use(
   express.urlencoded({ limit: "10mb", extended: true, parameterLimit: 50000 })
 );
 dotenv.config();
-const PORT = process.env.PORT_NO || 6000;
+const PORT = process.env.PORT_NO || 3001;
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }

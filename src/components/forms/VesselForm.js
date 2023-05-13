@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "../../context/AppContext";
 import { AccountCircle, Height, Report, Terminal } from "@mui/icons-material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,7 +16,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { vesselValidationSchema } from "./validations/vesselValidationSchema";
+import { vesselValidationSchema } from "../validations/vesselValidationSchema";
 const formText = {
   fontSize: "100px",
   marginTop: "10px",
@@ -154,33 +154,7 @@ const VesselForm = () => {
         </Select>
       </FormControl>
 
-      {/* *************************************************************************RECEIVING TERMINAL ***************************************************************************** */}
-      <FormControl sx={{ width: "300px", marginTop: "10px" }}>
-        <InputLabel id="demo-simple-select-helper-label"></InputLabel>
-        <Typography variant="p">
-          Receiving Terminal
-          <Typography component="span" sx={{ color: "red" }}>
-            *
-          </Typography>
-        </Typography>
-        <Select
-          value={cargoData["receivingTerminal"]}
-          onChange={(e) =>
-            setCargoData({ ...cargoData, receivingTerminal: e.target.value })
-          }
-          name="receivingTerminal"
-          label="Receiving Terminal"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value="ZEN TERMINALS">ZEN TERMINALS</MenuItem>
-          <MenuItem value="GHANSTOCK">GHANSTOCK</MenuItem>
-          <MenuItem value="BLUEOCEAN">BLUEOCEAN</MenuItem>
-          <MenuItem value="VIVO ENERGY">VIVO ENERGY</MenuItem>
-          <MenuItem value="TOTAL ENERGY">TOTAL ENERGY</MenuItem>
-        </Select>
-      </FormControl>
+     
 
       {/* ************************************************************************* VESSEL ARRIVAL ***************************************************************************** */}
       <Typography variant="p">
@@ -208,6 +182,29 @@ const VesselForm = () => {
       />
       {/* *************************************************************************VESSEL DEPARTURE***************************************************************************** */}
 
+      <Typography variant="p">
+        Vessel Departure Date
+        <Typography component="span" sx={{ color: "red" }}>
+          *
+        </Typography>
+      </Typography>
+
+      <TextField
+        sx={formText}
+        margin="normal"
+        required
+        fullWidth
+        name="vesselDepartureDate"
+        id="vesselDepartureDate"
+        label="Vessel Departure Date"
+        variant="outlined"
+        type="date" // set type to "date"
+        InputLabelProps={{ shrink: true }} // to shrink the label when the input is not empty
+        value={cargoData["vesselDepartureDate"]}
+        onChange={(e) =>
+          setCargoData({ ...cargoData, vesselDepartureDate: e.target.value })
+        }
+      />
       {/* *************************************************************************BILL OF LADING***************************************************************************** */}
 
       <Typography variant="p" sx={{ marginTop: "30px" }}>

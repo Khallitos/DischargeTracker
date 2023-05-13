@@ -50,6 +50,7 @@ import {
   UNSET_USERNAME,
   SET_INITIALSTATE,
   TOGGLE_SIDEBAR,
+  REVERSE_LOADING
 } from "./actions";
 
 //https://kanmusic.onrender.com
@@ -98,9 +99,15 @@ export const AppProvider = ({ children }) => {
   const addSingleCargoDetails = async({cargoData}) =>{
     console.log(cargoData)
     const { data } = await axios.post(
-      `http://localhost:6000/api/v1/upload/singleCargoDetails`,
+      `http://localhost:3001/api/v1/upload/singleCargoDetails`,
       cargoData
     );
+  }
+
+  // reverse loading
+
+  const reverseLoading = () => {
+    dispatch({type: REVERSE_LOADING})
   }
   //set localstates
 
@@ -610,6 +617,7 @@ export const AppProvider = ({ children }) => {
         getAllRandomSongs,
         setLocalStorage,
         toggleSideBar,
+        reverseLoading
       }}
     >
       {children}

@@ -1,33 +1,18 @@
-import React, { useState } from "react";
-import CssBaseline from "@mui/material/CssBaseline";
+import React, { useState,useEffect } from "react";
 import Box from "@mui/material/Box";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
-import InboxIcon from "@mui/icons-material/Inbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
 import AssessmentIcon from "@mui/icons-material/Assessment";
-import Container from "@mui/material/Container";
-import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import AddIcon from "@mui/icons-material/Add";
 import Link from "next/link";
-import Paper from "@mui/material/Paper";
 import { useAppContext } from "../context/AppContext";
 import { AccountCircle, Report, Terminal } from "@mui/icons-material";
-import dayjs from "dayjs";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
-import StepButton from "@mui/material/StepButton";
+import CircularProgress from "@mui/material/CircularProgress";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import ReceivingForm from "../components/ReceivingForm";
-import VesselForm from "../components/VesselForm";
-import MogsForm from "../components/MogsForm";
+import ReceivingForm from "../components/forms/ReceivingForm";
+import VesselForm from "../components/forms/VesselForm";
+import MogsForm from "../components/forms/MogsForm";
 
 import {
   Button,
@@ -41,8 +26,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import ArticleIcon from "@mui/icons-material/Article";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
+
 
 const dashboardDesign = {
   display: "flex",
@@ -115,10 +99,14 @@ function getStepContent(step) {
 }
 const add = () => {
   const [values, setValues] = useState(initialState);
-  const { isSideBarReduce, toggleSideBar, showAlert,currentStep } = useAppContext();
+  const { isSideBarReduce, toggleSideBar, showAlert,currentStep,cargoData,setCargoData,isloading, reverseLoading } = useAppContext();
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+  
+  const setReverseLoading = () => {
+    reverseLoading()
+  }
 
   const showStep = (step) => {
     switch (step) {
@@ -149,6 +137,24 @@ const add = () => {
       fontWeight: "bold",
     },
   };
+
+  useEffect(()=>{
+   
+   setCargoData([])
+   setReverseLoading()
+  }, [values.parcelType])
+
+  if (isloading)
+  return (
+    <CircularProgress
+      sx={{
+        position: "fixed",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      }}
+    />
+  );
 
   return (
     <Box sx={dashboardDesign}>
@@ -265,9 +271,7 @@ const add = () => {
                   <StepLabel></StepLabel>
                 </Step>
 
-                <Step>
-                  <StepLabel></StepLabel>
-                </Step>
+              
               </Stepper>
               {showStep(currentStep)}
             </Box>
@@ -276,34 +280,29 @@ const add = () => {
           )}
           {/* *******************************************************************************DOUBLE TYPE *********************************************************************** */}
           {values.parcelType === "Double" ? (
-            <Box>
-              <Divider orientation="horizontal" />
-              <Typography variant="p" sx={SingledischargeHeader}>
-                Add Double Parcel Details
-              </Typography>
-              <Divider orientation="horizontal" />
-
-              <TextField
-                sx={formText}
-                margin="normal"
-                required
-                fullWidth
-                name="username"
-                id="outlined-basic"
-                label="Username"
-                variant="outlined"
-                value={values.username}
-                autoComplete="username"
-                onChange={handleChange}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <AccountCircle />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Box>
+                <Box sx={{ width: "100%", marginBottom: "20px" }}>
+                <Typography variant="p" sx={SingledischargeHeader}>
+                  Add Single Parcel Details
+                </Typography>
+                <Stepper
+                  style={{ width: "100%" }}
+                  activeStep={currentStep}
+                  orientation="horizontal"
+                >
+                  <Step>
+                    <StepLabel></StepLabel>
+                  </Step>
+  
+                  <Step>
+                    <StepLabel></StepLabel>
+                  </Step>
+  
+                  <Step>
+                    <StepLabel></StepLabel>
+                  </Step>
+                </Stepper>
+                {showStep(currentStep)}
+              </Box>
           ) : (
             <Box></Box>
           )}

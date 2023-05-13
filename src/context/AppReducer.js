@@ -42,6 +42,7 @@ import {
   IS_USER_LOGGED_OUT,
   SET_INITIALSTATE,
   TOGGLE_SIDEBAR,
+  REVERSE_LOADING
 } from "./actions";
 
 export const AppReducer = (state, action) => {
@@ -63,6 +64,13 @@ export const AppReducer = (state, action) => {
       showAlert: true,
       alertText: "Provide all details",
       alertType: "danger",
+    };
+  }
+
+  if (action.type === REVERSE_LOADING) {
+    return {
+      ...state,
+      isloading:false
     };
   }
 
