@@ -159,7 +159,18 @@ const add = () => {
 
     console.log("i fired");
     setReverseLoading();
-    setVesselData([]);
+    setVesselData({
+      vesselName: "",
+      productType: "",
+      vesselArrivalDate: "",
+      vesselDepartureDate: "",
+      BillOfLading: "",
+      vesselGOV: "",
+      vesselDensity15: "",
+      vesselGSV: "",
+      vesselMetricTonesVAC: "",
+      vesselMetricTonesAIR: "",
+      linePacking: ""})
   }, [parcel.parcelType]);
 
   if (isloading)

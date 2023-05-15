@@ -30,6 +30,8 @@ const ReceivingForm = () => {
     setStep,
     cargoData,
     setCargoData,
+    setFinalData,
+    finalData,
     isSideBarReduce,
     toggleSideBar,
     showAlert,
@@ -42,7 +44,7 @@ const ReceivingForm = () => {
 
   const ReceivingFormValidation = async (e) => {
     e.preventDefault()
-    let receivingFormData = {
+    let receivingFormData = [{
       receivingTerminalGOV: cargoData["receivingTerminalGOV"],
       receivingTerminal: cargoData["receivingTerminal"],
       receivingTerminalDensity: cargoData["receivingTerminalDensity"],
@@ -61,8 +63,9 @@ const ReceivingForm = () => {
       mogsTerminalGSV20: cargoData["mogsTerminalGSV20"],
       mogsTerminalMTVAC20: cargoData["mogsTerminalMTVAC20"],
       mogsTerminalMTAIR20: cargoData["mogsTerminalMTAIR20"],
-      
-    };
+       }];
+    setFinalData({...finalData, "Vessel": receivingFormData})
+
 
     // console.log(receivingFormData);
 

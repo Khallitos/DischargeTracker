@@ -88,7 +88,7 @@ export const AppProvider = ({ children }) => {
   const [currentStep , setStep]= useState(1);
   const [vesselData, setVesselData] = useState([])
   const [cargoData,setCargoData] = useState({});
-  const [finalData, setFinalData] = useState([])
+  const [finalData, setFinalData] = useState({})
   const router = useRouter();
 
 
