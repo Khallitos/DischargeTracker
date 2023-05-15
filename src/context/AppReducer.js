@@ -42,7 +42,10 @@ import {
   IS_USER_LOGGED_OUT,
   SET_INITIALSTATE,
   TOGGLE_SIDEBAR,
-  REVERSE_LOADING
+  REVERSE_LOADING,
+  SETDOUBLEPARCEL,
+  SETSINGLEPARCEL,
+  SETMULTIPARCEL
 } from "./actions";
 
 export const AppReducer = (state, action) => {
@@ -57,7 +60,26 @@ export const AppReducer = (state, action) => {
       },
     };
   }
+  if (action.type === SETSINGLEPARCEL) {
+    return {
+      ...state,
+      parcelType: "Single"
+    };
+  }
 
+  if (action.type === SETDOUBLEPARCEL) {
+    return {
+      ...state,
+      parcelType: "Double"
+    };
+  }
+
+  if (action.type === SETMULTIPARCEL) {
+    return {
+      ...state,
+      parcelType: "MULTI"
+    };
+  }
   if (action.type === EMPTY_ERR) {
     return {
       ...state,
@@ -245,7 +267,7 @@ export const AppReducer = (state, action) => {
       isloading: false,
     };
   }
-  if (action.type === SET_SINGLE_SONG) {
+  if (action.type === SET_Double_SONG) {
     return {
       ...state,
       singleSongDetails: action.payload.data,

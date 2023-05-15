@@ -82,7 +82,7 @@ const steps = [
 
 const theme = createTheme();
 
-const add = () => { 
+const singleparcel = () => { 
   const {
     isSideBarReduce,
     toggleSideBar,
@@ -96,7 +96,6 @@ const add = () => {
     parcelType,
     parcel,
     setParcel,
-    setVesselData,
     setDoubleParcelType,
     setSingleParcelType,
     setMultiParcelType
@@ -152,27 +151,24 @@ const add = () => {
     },
   };
 
-  useEffect(() => {
-   
-    setCargoData([]);
-    setStep(1);
+  // useEffect(() => {
+  //   setCargoData([]);
+  //   setStep(1);
+  //   console.log("i fired")
+  //   setReverseLoading();
+  // }, [parcel.parcelType]);
 
-    console.log("i fired");
-    setReverseLoading();
-    setVesselData([]);
-  }, [parcel.parcelType]);
-
-  if (isloading)
-    return (
-      <CircularProgress
-        sx={{
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      />
-    );
+  // if (isloading)
+  //   return (
+  //     <CircularProgress
+  //       sx={{
+  //         position: "fixed",
+  //         top: "50%",
+  //         left: "50%",
+  //         transform: "translate(-50%, -50%)",
+  //       }}
+  //     />
+  //   );
 
   return (
     <Box sx={dashboardDesign}>
@@ -288,7 +284,9 @@ const add = () => {
                 <Step>
                   <StepLabel></StepLabel>
                 </Step>
-                
+                <Step>
+                  <StepLabel></StepLabel>
+                </Step>
               </Stepper>
               {showStep(currentStep)}
             </Box>
@@ -314,9 +312,7 @@ const add = () => {
                   <StepLabel></StepLabel>
                 </Step>
 
-                <Step>
-                  <StepLabel></StepLabel>
-                </Step>
+               
               </Stepper>
               {showStep(currentStep)}
             </Box>
@@ -331,4 +327,4 @@ const add = () => {
   );
 };
 
-export default add;
+export default singleparcel;

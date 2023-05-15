@@ -60,18 +60,17 @@ const ReceivingForm = () => {
       
     };
 
-    console.log(receivingFormData);
+    setStep(3)
+    // const isValid = await receivingVesselSchema.isValid(receivingFormData);
+    // console.log(isValid);
+    // if (isValid) {
+    //   setStep(3)
 
-    const isValid = await receivingVesselSchema.isValid(receivingFormData);
-    console.log(isValid);
-    if (isValid) {
-      addSingleCargoDetails({cargoData})
-
-    } else {
-      toast.error("Please fill the data with valid credentials", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    }
+    // } else {
+    //   toast.error("Please fill the data with valid credentials", {
+    //     position: toast.POSITION.TOP_RIGHT,
+    //   });
+    // }
   };
 
 
@@ -638,7 +637,7 @@ const ReceivingForm = () => {
 
     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
       <Button onClick={() => setStep(1)}>Back</Button>
-      <Button onClick={ReceivingFormValidation}>Completed</Button>
+      <Button onClick={ReceivingFormValidation}>Next</Button>
     </Box>
   </Box>
     

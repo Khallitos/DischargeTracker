@@ -33,8 +33,12 @@ const ReceivingForm = () => {
     isSideBarReduce,
     toggleSideBar,
     showAlert,
-    addSingleCargoDetails
+    addSingleCargoDetails,
+    parcel,
+    parcelType
   } = useAppContext();
+  let parcelChecker = parcel.parcelType
+    console.log(parcelChecker)
 
   const ReceivingFormValidation = async (e) => {
     e.preventDefault()
@@ -60,18 +64,18 @@ const ReceivingForm = () => {
       
     };
 
-    console.log(receivingFormData);
+    // console.log(receivingFormData);
 
-    const isValid = await receivingVesselSchema.isValid(receivingFormData);
-    console.log(isValid);
-    if (isValid) {
-      addSingleCargoDetails({cargoData})
+    // const isValid = await receivingVesselSchema.isValid(receivingFormData);
+    // console.log(isValid);
+    // if (isValid) {
+    //   addSingleCargoDetails({cargoData})
 
-    } else {
-      toast.error("Please fill the data with valid credentials", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    }
+    // } else {
+    //   toast.error("Please fill the data with valid credentials", {
+    //     position: toast.POSITION.TOP_RIGHT,
+    //   });
+    // }
   };
 
 
@@ -635,7 +639,7 @@ const ReceivingForm = () => {
     />
 
     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-      <Button onClick={() => setStep(1)}>Back</Button>
+      <Button onClick={() => {parcelChecker === "Double" ? setStep(2)  : setStep(1)}}>Back</Button>
       <Button onClick={ReceivingFormValidation}>Completed</Button>
     </Box>
   </Box>

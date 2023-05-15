@@ -50,7 +50,10 @@ import {
   UNSET_USERNAME,
   SET_INITIALSTATE,
   TOGGLE_SIDEBAR,
-  REVERSE_LOADING
+  REVERSE_LOADING,
+  SETDOUBLEPARCEL,
+  SETSINGLEPARCEL,
+  SETMULTIPARCEL
 } from "./actions";
 
 //https://kanmusic.onrender.com
@@ -58,20 +61,12 @@ import {
 // const verified = localStorage.getItem("verified");
 
 const initialState = {
-  name: "",
-  password: "",
+
   showAlert: false,
   alertText: "",
   alertType: "",
   isVerified: false,
   isUserToken: false,
-  Genre: ["Afrobeat", "Amapiano", "Hiphop"],
-  DefaultGenre: "Afrobeat",
-  songDetails: [],
-  AllSongs: [],
-  TrendingSongs: [],
-  singleSongDetails: [],
-  RandomSongs: [],
   page: 1,
   totalSongs: 0,
   numOfPages: 1,
@@ -82,14 +77,17 @@ const initialState = {
   ApprovedSongs: "",
   totalDownloads: "",
   isSideBarReduce: false,
+  
 };
 
 export const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
+  const [parcel ,setParcel] = useState({parcelType: ""})
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const [currentStep , setStep]= useState(1);
-  const [cargoData,setCargoData] = useState([]);
+  const [vesselData, setVesselData] = useState([])
+  const [cargoData,setCargoData] = useState({});
   const [finalData, setFinalData] = useState([])
   const router = useRouter();
 
@@ -108,6 +106,20 @@ export const AppProvider = ({ children }) => {
 
   const reverseLoading = () => {
     dispatch({type: REVERSE_LOADING})
+  }
+
+  //set parcel type 
+  const setSingleParcelType = () => {
+    dispatch({type: SETSINGLEPARCEL})
+  }
+    //set parcel type 
+    const setDoubleParcelType = () => {
+      dispatch({type: SETDOUBLEPARCEL})
+    }
+
+   //set parcel type 
+   const setMultiParcelType = () => {
+    dispatch({type: SETMULTIPARCEL})
   }
   //set localstates
 
@@ -583,10 +595,14 @@ export const AppProvider = ({ children }) => {
         currentStep,
         setStep,
         cargoData,
+        parcel,
+        setParcel,
         setCargoData,
         finalData,
         setFinalData,
         addSingleCargoDetails,
+        vesselData,
+        setVesselData,
         EmptyErr,
         displayPasswordMismatchErr,
         setupUser,
@@ -617,7 +633,10 @@ export const AppProvider = ({ children }) => {
         getAllRandomSongs,
         setLocalStorage,
         toggleSideBar,
-        reverseLoading
+        reverseLoading,
+        setDoubleParcelType,
+        setSingleParcelType,
+        setMultiParcelType
       }}
     >
       {children}

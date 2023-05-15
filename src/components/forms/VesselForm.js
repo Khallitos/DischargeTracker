@@ -13,6 +13,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Step,
   TextField,
   Typography,
 } from "@mui/material";
@@ -31,48 +32,55 @@ const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const VesselForm = () => {
   const {
     setStep,
-    cargoData,
-    setCargoData,
+    vesselData,
+    setVesselData,
     isSideBarReduce,
     toggleSideBar,
     showAlert,
+    parcel,
+    parcelType,
   } = useAppContext();
 
   const [isBillofLading, setIsBillofLading] = useState(true);
 
-
   const BillCheckBox = () => {
     setIsBillofLading(!isBillofLading);
-    setCargoData({ ...cargoData, BillOfLading: "N/A" });
+    setVesselData({ ...vesselData, BillOfLading: "N/A" });
   };
 
   const VesselValidation = async (e) => {
     let vesselFormData = {
-      vesselName: cargoData["vesselName"],
-      productType: cargoData["productType"],
-      receivingTerminal: cargoData["receivingTerminal"],
-      vesselArrivalDate: cargoData["vesselArrivalDate"],
-      vesselDepartureDate: cargoData["vesselDepartureDate"],
-      BillOfLading: cargoData["BillOfLading"],
-      vesselGOV: cargoData["vesselGOV"],
-      vesselDensity15: cargoData["vesselDensity15"],
-      vesselGSV: cargoData["vesselGSV"],
-      vesselMetricTonesVAC: cargoData["vesselMetricTonesVAC"],
-      vesselMetricTonesAIR: cargoData["vesselMetricTonesAIR"],
-      linePacking: cargoData["linePacking"],
+      vesselName: vesselData["vesselName"],
+      productType: vesselData["productType"],
+      vesselArrivalDate: vesselData["vesselArrivalDate"],
+      vesselDepartureDate: vesselData["vesselDepartureDate"],
+      BillOfLading: vesselData["BillOfLading"],
+      vesselGOV: vesselData["vesselGOV"],
+      vesselDensity15: vesselData["vesselDensity15"],
+      vesselGSV: vesselData["vesselGSV"],
+      vesselMetricTonesVAC: vesselData["vesselMetricTonesVAC"],
+      vesselMetricTonesAIR: vesselData["vesselMetricTonesAIR"],
+      linePacking: vesselData["linePacking"],
     };
 
-    console.log(vesselFormData);
-
-    const isValid = await vesselValidationSchema.isValid(vesselFormData);
-    console.log(isValid);
-    if (isValid) {
-      setStep(2);
-    } else {
-      toast.error("Please fill the data with valid credentials", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+    let parcelChecker = parcel.parcelType;
+    console.log(parcelChecker);
+    {
+      parcelChecker === "Double"
+        ? setStep(2)
+        : parcelChecker === "Single"
+        ? setStep(3)
+        : setStep(2);
     }
+    // const isValid = await vesselValidationSchema.isValid(vesselFormData);
+    // console.log(isValid);
+    // if (isValid) {
+    //   setStep(2);
+    // } else {
+    //   toast.error("Please fill the data with valid credentials", {
+    //     position: toast.POSITION.TOP_RIGHT,
+    //   });
+    // }
   };
 
   return (
@@ -120,9 +128,9 @@ const VesselForm = () => {
         id="outlined-basic"
         label="Vessel Name"
         variant="outlined"
-        value={cargoData["vesselName"]}
+        value={vesselData["vesselName"]}
         onChange={(e) =>
-          setCargoData({ ...cargoData, vesselName: e.target.value })
+          setVesselData({ ...vesselData, vesselName: e.target.value })
         }
       />
 
@@ -136,12 +144,12 @@ const VesselForm = () => {
           </Typography>
         </Typography>
         <Select
-          value={cargoData["productType"]}
+          value={vesselData["productType"]}
           displayEmpty
           name="productType"
           label="Product Type"
           onChange={(e) =>
-            setCargoData({ ...cargoData, productType: e.target.value })
+            setVesselData({ ...vesselData, productType: e.target.value })
           }
         >
           <MenuItem value="">
@@ -153,8 +161,6 @@ const VesselForm = () => {
           <MenuItem value="Bitumen">Bitumen</MenuItem>
         </Select>
       </FormControl>
-
-     
 
       {/* ************************************************************************* VESSEL ARRIVAL ***************************************************************************** */}
       <Typography variant="p">
@@ -175,9 +181,9 @@ const VesselForm = () => {
         variant="outlined"
         type="date" // set type to "date"
         InputLabelProps={{ shrink: true }} // to shrink the label when the input is not empty
-        value={cargoData["vesselArrivalDate"]}
+        value={vesselData["vesselArrivalDate"]}
         onChange={(e) =>
-          setCargoData({ ...cargoData, vesselArrivalDate: e.target.value })
+          setVesselData({ ...vesselData, vesselArrivalDate: e.target.value })
         }
       />
       {/* *************************************************************************VESSEL DEPARTURE***************************************************************************** */}
@@ -200,9 +206,9 @@ const VesselForm = () => {
         variant="outlined"
         type="date" // set type to "date"
         InputLabelProps={{ shrink: true }} // to shrink the label when the input is not empty
-        value={cargoData["vesselDepartureDate"]}
+        value={vesselData["vesselDepartureDate"]}
         onChange={(e) =>
-          setCargoData({ ...cargoData, vesselDepartureDate: e.target.value })
+          setVesselData({ ...vesselData, vesselDepartureDate: e.target.value })
         }
       />
       {/* *************************************************************************BILL OF LADING***************************************************************************** */}
@@ -225,9 +231,9 @@ const VesselForm = () => {
             id="outlined-basic"
             label="Bill of Lading"
             variant="outlined"
-            value={cargoData["BillOfLading"]}
+            value={vesselData["BillOfLading"]}
             onChange={(e) =>
-              setCargoData({ ...cargoData, BillOfLading: e.target.value })
+              setVesselData({ ...vesselData, BillOfLading: e.target.value })
             }
           />
         </>
@@ -276,9 +282,9 @@ const VesselForm = () => {
         id="outlined-basic"
         label="GOV"
         variant="outlined"
-        value={cargoData["vesselGOV"]}
+        value={vesselData["vesselGOV"]}
         onChange={(e) =>
-          setCargoData({ ...cargoData, vesselGOV: e.target.value })
+          setVesselData({ ...vesselData, vesselGOV: e.target.value })
         }
       />
 
@@ -298,9 +304,9 @@ const VesselForm = () => {
         id="outlined-basic"
         label="Density @15"
         variant="outlined"
-        value={cargoData["vesselDensity15"]}
+        value={vesselData["vesselDensity15"]}
         onChange={(e) =>
-          setCargoData({ ...cargoData, vesselDensity15: e.target.value })
+          setVesselData({ ...vesselData, vesselDensity15: e.target.value })
         }
       />
 
@@ -320,9 +326,9 @@ const VesselForm = () => {
         id="outlined-basic"
         label="GSV @15"
         variant="outlined"
-        value={cargoData["vesselGSV"]}
+        value={vesselData["vesselGSV"]}
         onChange={(e) =>
-          setCargoData({ ...cargoData, vesselGSV: e.target.value })
+          setVesselData({ ...vesselData, vesselGSV: e.target.value })
         }
       />
 
@@ -342,9 +348,9 @@ const VesselForm = () => {
         id="outlined-basic"
         label="MT(VAC)"
         variant="outlined"
-        value={cargoData["vesselMetricTonesVAC"]}
+        value={vesselData["vesselMetricTonesVAC"]}
         onChange={(e) =>
-          setCargoData({ ...cargoData, vesselMetricTonesVAC: e.target.value })
+          setVesselData({ ...vesselData, vesselMetricTonesVAC: e.target.value })
         }
       />
 
@@ -364,9 +370,9 @@ const VesselForm = () => {
         id="outlined-basic"
         label="MT(AIR)"
         variant="outlined"
-        value={cargoData["vesselMetricTonesAIR"]}
+        value={vesselData["vesselMetricTonesAIR"]}
         onChange={(e) =>
-          setCargoData({ ...cargoData, vesselMetricTonesAIR: e.target.value })
+          setVesselData({ ...vesselData, vesselMetricTonesAIR: e.target.value })
         }
       />
 
@@ -385,9 +391,9 @@ const VesselForm = () => {
         id="outlined-basic"
         label="Line Packing Difference"
         variant="outlined"
-        value={cargoData["linePacking"]}
+        value={vesselData["linePacking"]}
         onChange={(e) =>
-          setCargoData({ ...cargoData, linePacking: e.target.value })
+          setVesselData({ ...vesselData, linePacking: e.target.value })
         }
       />
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
