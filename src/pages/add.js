@@ -91,6 +91,7 @@ const add = () => {
     setStep,
     cargoData,
     setCargoData,
+    setCargoData2,
     isloading,
     reverseLoading,
     parcelType,
@@ -156,8 +157,6 @@ const add = () => {
    
     setCargoData([]);
     setStep(1);
-
-    console.log("i fired");
     setReverseLoading();
     setVesselData({
       vesselName: "",
@@ -170,7 +169,48 @@ const add = () => {
       vesselGSV: "",
       vesselMetricTonesVAC: "",
       vesselMetricTonesAIR: "",
-      linePacking: ""})
+      linePacking: ""}),
+      setCargoData({
+        receivingTerminalGOV: "",
+        receivingTerminal:  "",
+        receivingTerminalDensity: "",
+        receivingTerminalWCF:  "",
+        receivingTerminalTemperature:  "",
+        receivingTerminalVCF:  "",
+        receivingTerminalGSV:  "",
+        receivingTerminalMTVAC:  "",
+        receivingTerminalMTAIR:  "",
+        receivingTerminalGSV20:  "",
+        receivingTerminalMTVAC20:  "",
+        receivingTerminalMTAIR20:  "",
+        mogsFlowmeterReading: "",
+        mogsTerminalDensity20:  "",
+        mogsTerminalVCF:  "",
+        mogsTerminalGSV20:  "",
+        mogsTerminalMTVAC20:  "",
+        mogsTerminalMTAIR20:  "",
+      })
+      setCargoData2({
+        receivingTerminalGOV: "",
+        receivingTerminal:  "",
+        receivingTerminalDensity: "",
+        receivingTerminalWCF:  "",
+        receivingTerminalTemperature:  "",
+        receivingTerminalVCF:  "",
+        receivingTerminalGSV:  "",
+        receivingTerminalMTVAC:  "",
+        receivingTerminalMTAIR:  "",
+        receivingTerminalGSV20:  "",
+        receivingTerminalMTVAC20:  "",
+        receivingTerminalMTAIR20:  "",
+        mogsFlowmeterReading: "",
+        mogsTerminalDensity20:  "",
+        mogsTerminalVCF:  "",
+        mogsTerminalGSV20:  "",
+        mogsTerminalMTVAC20:  "",
+        mogsTerminalMTAIR20:  "",
+      })
+
   }, [parcel.parcelType]);
 
   if (isloading)

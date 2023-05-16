@@ -49,7 +49,9 @@ const VesselForm = () => {
   };
 
   const VesselValidation = async (e) => {
+    
     let vesselFormData = {
+      
       vesselName: vesselData["vesselName"],
       productType: vesselData["productType"],
       vesselArrivalDate: vesselData["vesselArrivalDate"],
@@ -64,7 +66,6 @@ const VesselForm = () => {
     };
 
     let parcelChecker = parcel.parcelType;
-    console.log(parcelChecker);
     {
       parcelChecker === "Double"
         ? setStep(2)

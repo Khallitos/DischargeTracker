@@ -74,7 +74,7 @@ const ReceivingForm = () => {
         setFinalData({...finalData , Vessel: receivingFormData})
         console.log(finalData)
        }
-       else {
+       else if(parcelChecker === 'Double'){
         setFinalData({
           ...finalData,
           Vessel: [finalData.Vessel[0], receivingFormData],

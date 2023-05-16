@@ -43,94 +43,95 @@ const cargoDetailsSchema = yup.object().shape({
 
 // ADD SINGLE CARGO DETAILS
 const singleCargoDetails = async (req, res) => {
-  const cargoDetails = req.body;
-  console.log(cargoDetails);
+ const {finalData,vesselData} = req.body
+ console.log("this is the vessel data", vesselData)
+ console.log("this is the final data", finalData)
 
-  try {
-    // Validate the cargo details using the schema
-    const validateDetails = await cargoDetailsSchema.validate(cargoDetails);
-    if (validateDetails) {
-      const cargoId = "cargo" + nanoid();
-      const {
-        vesselName,
-        productType,
-        receivingTerminal,
-        vesselArrivalDate,
-        vesselDepartureDate,
-        BillOfLading,
-        vesselGOV,
-        vesselDensity15,
-        vesselGSV,
-        vesselMetricTonesVAC,
-        vesselMetricTonesAIR,
-        linePacking,
-        receivingTerminalMTAIR20,
-        receivingTerminalMTVAC20,
-        receivingTerminalGSV20,
-        receivingTerminalMTAIR,
-        receivingTerminalMTVAC,
-        receivingTerminalGSV,
-        receivingTerminalVCF,
-        receivingTerminalTemperature,
-        receivingTerminalWCF,
-        receivingTerminalDensity,
-        receivingTerminalGOV,
-        mogsTerminalMTAIR20,
-        mogsTerminalMTVAC20,
-        mogsTerminalGSV20,
-        mogsTerminalVCF,
-        mogsTerminalDensity20,
-        mogsFlowmeterReading,
-      } = cargoDetails;
-      const insertCargoDetails = await Upload.create({
-        cargoId,
-        vesselName,
-        productType,
-        receivingTerminal,
-        vesselArrivalDate,
-        vesselDepartureDate,
-        BillOfLading,
-        vesselGOV,
-        vesselDensity15,
-        vesselGSV,
-        vesselMetricTonesVAC,
-        vesselMetricTonesAIR,
-        linePacking,
-      });
+  // try {
+  //   // Validate the cargo details using the schema
+  //   const validateDetails = await cargoDetailsSchema.validate(cargoDetails);
+  //   if (validateDetails) {
+  //     const cargoId = "cargo" + nanoid();
+  //     const {
+  //       vesselName,
+  //       productType,
+  //       receivingTerminal,
+  //       vesselArrivalDate,
+  //       vesselDepartureDate,
+  //       BillOfLading,
+  //       vesselGOV,
+  //       vesselDensity15,
+  //       vesselGSV,
+  //       vesselMetricTonesVAC,
+  //       vesselMetricTonesAIR,
+  //       linePacking,
+  //       receivingTerminalMTAIR20,
+  //       receivingTerminalMTVAC20,
+  //       receivingTerminalGSV20,
+  //       receivingTerminalMTAIR,
+  //       receivingTerminalMTVAC,
+  //       receivingTerminalGSV,
+  //       receivingTerminalVCF,
+  //       receivingTerminalTemperature,
+  //       receivingTerminalWCF,
+  //       receivingTerminalDensity,
+  //       receivingTerminalGOV,
+  //       mogsTerminalMTAIR20,
+  //       mogsTerminalMTVAC20,
+  //       mogsTerminalGSV20,
+  //       mogsTerminalVCF,
+  //       mogsTerminalDensity20,
+  //       mogsFlowmeterReading,
+  //     } = cargoDetails;
+  //     const insertCargoDetails = await Upload.create({
+  //       cargoId,
+  //       vesselName,
+  //       productType,
+  //       receivingTerminal,
+  //       vesselArrivalDate,
+  //       vesselDepartureDate,
+  //       BillOfLading,
+  //       vesselGOV,
+  //       vesselDensity15,
+  //       vesselGSV,
+  //       vesselMetricTonesVAC,
+  //       vesselMetricTonesAIR,
+  //       linePacking,
+  //     });
 
-      const insertReceivingTerminalDetails = await ReceivingTerminalDetails.create({
-        cargoId,
-        receivingTerminalMTAIR20,
-        receivingTerminalMTVAC20,
-        receivingTerminalGSV20,
-        receivingTerminalMTAIR,
-        receivingTerminalMTVAC,
-        receivingTerminalGSV,
-        receivingTerminalVCF,
-        receivingTerminalTemperature,
-        receivingTerminalWCF,
-        receivingTerminalDensity,
-        receivingTerminalGOV,
-        mogsTerminalMTAIR20,
-        mogsTerminalMTVAC20,
-        mogsTerminalGSV20,
-        mogsTerminalVCF,
-        mogsTerminalDensity20,
-        mogsFlowmeterReading,
-      });
-      console.log(insertReceivingTerminalDetails)
-    } else {
-      res.status(201).json(insertCargoDetails);
-    }
-  } catch (error) {
-    if (error instanceof yup.ValidationError) {
-      // Return a 400 Bad Request error if the data does not match the schema
-      throw new BadRequestError(error.message);
-    } else {
-      // Otherwise, return a 500 Internal Server Error
-      throw error;
-    }
-  }
+  //     const insertReceivingTerminalDetails = await ReceivingTerminalDetails.create({
+  //       cargoId,
+  //       receivingTerminalMTAIR20,
+  //       receivingTerminalMTVAC20,
+  //       receivingTerminalGSV20,
+  //       receivingTerminalMTAIR,
+  //       receivingTerminalMTVAC,
+  //       receivingTerminalGSV,
+  //       receivingTerminalVCF,
+  //       receivingTerminalTemperature,
+  //       receivingTerminalWCF,
+  //       receivingTerminalDensity,
+  //       receivingTerminalGOV,
+  //       mogsTerminalMTAIR20,
+  //       mogsTerminalMTVAC20,
+  //       mogsTerminalGSV20,
+  //       mogsTerminalVCF,
+  //       mogsTerminalDensity20,
+  //       mogsFlowmeterReading,
+  //     });
+  //     console.log(insertReceivingTerminalDetails)
+  //   } else {
+  //     res.status(201).json(insertCargoDetails);
+  //   }
+  // } catch (error) {
+  //   if (error instanceof yup.ValidationError) {
+  //     // Return a 400 Bad Request error if the data does not match the schema
+  //     throw new BadRequestError(error.message);
+  //   } else {
+  //     // Otherwise, return a 500 Internal Server Error
+  //     throw error;
+  //   }
+  // }
 };
 
 export { singleCargoDetails };

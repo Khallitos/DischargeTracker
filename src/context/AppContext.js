@@ -88,17 +88,17 @@ export const AppProvider = ({ children }) => {
   const [currentStep , setStep]= useState(1);
   const [vesselData, setVesselData] = useState([])
   const [cargoData,setCargoData] = useState({});
+  const [cargoData2,setCargoData2] = useState({});
   const [finalData, setFinalData] = useState({})
   const router = useRouter();
 
 
   // add single cargo detail
 
-  const addSingleCargoDetails = async({cargoData}) =>{
-    console.log(cargoData)
+  const addSingleCargoDetails = async({vesselData,finalData}) =>{
     const { data } = await axios.post(
       `http://localhost:3001/api/v1/upload/singleCargoDetails`,
-      cargoData
+    {vesselData,finalData}
     );
   }
 
@@ -595,8 +595,10 @@ export const AppProvider = ({ children }) => {
         currentStep,
         setStep,
         cargoData,
+        cargoData2,
         parcel,
         setParcel,
+        setCargoData2,
         setCargoData,
         finalData,
         setFinalData,
