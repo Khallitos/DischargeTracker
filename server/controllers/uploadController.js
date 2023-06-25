@@ -44,8 +44,7 @@ const cargoDetailsSchema = yup.object().shape({
 // ADD SINGLE CARGO DETAILS
 const singleCargoDetails = async (req, res) => {
  const {finalData,vesselData} = req.body
- console.log("this is the vessel data", vesselData)
- console.log("this is the final data", finalData)
+
 
   // try {
   //   // Validate the cargo details using the schema

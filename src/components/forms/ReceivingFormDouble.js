@@ -40,7 +40,7 @@ const ReceivingForm = () => {
 
   const ReceivingFormValidation = async (e) => {
     e.preventDefault()
-    let receivingFormData = [{
+    let receivingFormData2 = [{
       receivingTerminalGOV: cargoData["receivingTerminalGOV"],
       receivingTerminal: cargoData["receivingTerminal"],
       receivingTerminalDensity: cargoData["receivingTerminalDensity"],
@@ -60,10 +60,26 @@ const ReceivingForm = () => {
       mogsTerminalMTVAC20: cargoData["mogsTerminalMTVAC20"],
       mogsTerminalMTAIR20: cargoData["mogsTerminalMTAIR20"],
        }];
-       setFinalData({...finalData, "Vessel": receivingFormData})
-     
-    setStep(3)
-    // const isValid = await receivingVesselSchema.isValid(receivingFormData);
+
+       const pushFinalData1 = () => {
+        
+        setFinalData({
+          ...finalData,
+          receivingFormData2
+        });
+      
+        setStep(3);
+      };
+      
+      pushFinalData1();
+
+       
+      
+       
+    
+
+    console.log("final state",finalData)
+    // const isValid = await receivingVesselSchema.isValid(receivingFormData2);
     // console.log(isValid);
     // if (isValid) {
     //   setStep(3)

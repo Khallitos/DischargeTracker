@@ -68,22 +68,28 @@ const ReceivingForm = () => {
       mogsTerminalMTAIR20: cargoData2["mogsTerminalMTAIR20"],
        };
 
-       console.log(parcelChecker)
+      const pushFinalData = setFinalData({
+        ...finalData,
+         receivingFormData
+      });
+         console.log(finalData)
+      //  if(parcelChecker === 'Single'){
+      //   setFinalData({...finalData , Vessel: receivingFormData})
+      //   console.log(finalData)
+      //  }
+      //  else if(parcelChecker === 'Double') {
 
-       if(parcelChecker === 'Single'){
-        setFinalData({...finalData , Vessel: receivingFormData})
-        console.log(finalData)
-       }
-       else {
-        setFinalData({
-          ...finalData,
-          Vessel: [finalData.Vessel[0], receivingFormData],
-        });
+      //   setFinalData({
+      //     ...finalData,
+      //      Vessel: [finalData.Vessel[0], receivingFormData],
+      //   });
+      //   console.log(finalData)
         
-       }
+      //  }
       
       
-      addSingleCargoDetails({vesselData,finalData})
+     if(pushFinalData){addSingleCargoDetails({vesselData,finalData})} 
+     
       setVesselData({
         vesselName: "",
         productType: "",
