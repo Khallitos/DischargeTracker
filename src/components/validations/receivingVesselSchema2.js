@@ -1,8 +1,7 @@
 import * as yup from "yup";
 
-export const receivingVesselSchema = yup.object().shape({
-      terminalDetails: yup.array().of(
-        yup.object().shape({
+export const receivingVesselSchema2 = yup.object().shape({
+     
           receivingTerminalGOV: yup.string().required(),
           receivingTerminal: yup.string().required(),
           receivingTerminalDensity: yup.number().required(),
@@ -22,5 +21,3 @@ export const receivingVesselSchema = yup.object().shape({
           mogsTerminalMTVAC20: yup.number().required(),
           mogsTerminalMTAIR20: yup.number().required(),
         })
-      ),
-    });

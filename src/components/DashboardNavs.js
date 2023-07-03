@@ -25,12 +25,6 @@ const DashboardLinkDesign = {
 export default function DashboardNavs() {
   return (
     <div sx={DashboardLinkDesign}>
-      {/* <Box><Link href="/user/uploadsong">Upload Song</Link></Box>
-        
-       <Box><Link href="/user/profile">Profile</Link></Box> 
-       <Box><Link href="/user/songstats">Songstats</Link></Box> 
-       <Box><Link href="songstats/editsong">Edit Songs</Link></Box>  */}
-
       <List sx={style} component="nav" aria-label="mailbox folders">
         <Divider />
 

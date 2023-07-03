@@ -5,20 +5,17 @@ import AssessmentIcon from "@mui/icons-material/Assessment";
 import AddIcon from "@mui/icons-material/Add";
 import Link from "next/link";
 import { useAppContext } from "../context/AppContext";
-import { AccountCircle, Report, Terminal } from "@mui/icons-material";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import CircularProgress from "@mui/material/CircularProgress";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import ReceivingForm from "../components/forms/ReceivingForm";
+import ReceivingForm from "../components/forms/ReceivingFormComplete";
 import VesselForm from "../components/forms/VesselForm";
 import ReceivingFormDouble from "../components/forms/ReceivingFormDouble";
 
 import {
   Button,
   FormControl,
-  FormHelperText,
-  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
@@ -82,11 +79,9 @@ const steps = [
 
 const theme = createTheme();
 
-const add = () => { 
+const add = () => {
   const {
     isSideBarReduce,
-    toggleSideBar,
-    showAlert,
     currentStep,
     setStep,
     cargoData,
@@ -98,27 +93,13 @@ const add = () => {
     parcel,
     setParcel,
     setVesselData,
-    setDoubleParcelType,
-    setSingleParcelType,
-    setMultiParcelType
   } = useAppContext();
 
   const handleChange = (e) => {
     setParcel({ ...parcel, [e.target.name]: e.target.value });
   };
 
-  function getStepContent(step) {
-    switch (step) {
-      case 0:
-        return <VesselForm  />;
-      case 1:
-        return <ReceivingFormDouble />;
-      case 2:
-        return <ReceivingForm />;
-      default:
-        throw new Error("Unknown step");
-    }
-  }
+
 
   const setReverseLoading = () => {
     reverseLoading();
@@ -154,7 +135,7 @@ const add = () => {
   };
 
   useEffect(() => {
-   
+
     setCargoData([]);
     setStep(1);
     setReverseLoading();
@@ -169,47 +150,52 @@ const add = () => {
       vesselGSV: "",
       vesselMetricTonesVAC: "",
       vesselMetricTonesAIR: "",
-      linePacking: ""}),
+      linePacking: ""
+    }),
+
       setCargoData({
         receivingTerminalGOV: "",
-        receivingTerminal:  "",
+        receivingTerminal: "",
         receivingTerminalDensity: "",
-        receivingTerminalWCF:  "",
-        receivingTerminalTemperature:  "",
-        receivingTerminalVCF:  "",
-        receivingTerminalGSV:  "",
-        receivingTerminalMTVAC:  "",
-        receivingTerminalMTAIR:  "",
-        receivingTerminalGSV20:  "",
-        receivingTerminalMTVAC20:  "",
-        receivingTerminalMTAIR20:  "",
+        receivingTerminalWCF: "",
+        receivingTerminalTemperature: "",
+        receivingTerminalVCF: "",
+        receivingTerminalGSV: "",
+        receivingTerminalMTVAC: "",
+        receivingTerminalMTAIR: "",
+        receivingTerminalGSV20: "",
+        receivingTerminalMTVAC20: "",
+        receivingTerminalMTAIR20: "",
         mogsFlowmeterReading: "",
-        mogsTerminalDensity20:  "",
-        mogsTerminalVCF:  "",
-        mogsTerminalGSV20:  "",
-        mogsTerminalMTVAC20:  "",
-        mogsTerminalMTAIR20:  "",
+        mogsTerminalDensity20: "",
+        mogsTerminalVCF: "",
+        mogsTerminalGSV20: "",
+        mogsTerminalMTVAC20: "",
+        mogsTerminalMTAIR20: "",
       })
-      setCargoData2({
-        receivingTerminalGOV: "",
-        receivingTerminal:  "",
-        receivingTerminalDensity: "",
-        receivingTerminalWCF:  "",
-        receivingTerminalTemperature:  "",
-        receivingTerminalVCF:  "",
-        receivingTerminalGSV:  "",
-        receivingTerminalMTVAC:  "",
-        receivingTerminalMTAIR:  "",
-        receivingTerminalGSV20:  "",
-        receivingTerminalMTVAC20:  "",
-        receivingTerminalMTAIR20:  "",
-        mogsFlowmeterReading: "",
-        mogsTerminalDensity20:  "",
-        mogsTerminalVCF:  "",
-        mogsTerminalGSV20:  "",
-        mogsTerminalMTVAC20:  "",
-        mogsTerminalMTAIR20:  "",
-      })
+
+    setCargoData2({
+      receivingTerminalGOV: "",
+      receivingTerminal: "",
+      receivingTerminalDensity: "",
+      receivingTerminalWCF: "",
+      receivingTerminalTemperature: "",
+      receivingTerminalVCF: "",
+      receivingTerminalGSV: "",
+      receivingTerminalMTVAC: "",
+      receivingTerminalMTAIR: "",
+      receivingTerminalGSV20: "",
+      receivingTerminalMTVAC20: "",
+      receivingTerminalMTAIR20: "",
+      mogsFlowmeterReading: "",
+      mogsTerminalDensity20: "",
+      mogsTerminalVCF: "",
+      mogsTerminalGSV20: "",
+      mogsTerminalMTVAC20: "",
+      mogsTerminalMTAIR20: "",
+    })
+
+    
 
   }, [parcel.parcelType]);
 
@@ -271,34 +257,14 @@ const add = () => {
         )}
         <Divider />
       </Box>
+      {/* **********************************************MainSelector**************************************** */}
       <Box sx={dischargeFormBox}>
         <Box sx={formDesign}>
           <Typography variant="h5" sx={dischargeHeader}>
             Add Discharge Details
           </Typography>
           <Divider orientation="horizontal" />
-          {/* <Box sx={{ display: "flex" }}>
-            <Box>
-              <Button
-                startIcon={<ArticleIcon />}
-                variant="contained"
-                sx={{ marginRight: "10px", backgroundColor: "#1c2c54" }}
-              >
-                Single Parcel
-              </Button>
-            </Box>
-            <Box>
-              <Button
-                startIcon={<FileCopyIcon />}
-                variant="contained"
-                sx={{ backgroundColor: "#24b4eb" }}
-              >
-                Double Parcel
-              </Button>
-            </Box>
-          </Box> */}
-          {/* *******************************************************************************PARCEL TYPE *********************************************************************** */}
-          {/* Parcel  Type */}
+
           <FormControl sx={{ width: "300px" }}>
             <InputLabel id="demo-simple-select-helper-label"></InputLabel>
             <Typography variant="p">
@@ -321,12 +287,18 @@ const add = () => {
               <MenuItem value="Double">Double</MenuItem>
             </Select>
           </FormControl>
+
+          {parcel.parcelType === "Single" ? <Typography variant="p" sx={SingledischargeHeader}>
+            Add Single Parcel details
+          </Typography> : parcel.parcelType === "Double" ? <Typography variant="p" sx={SingledischargeHeader}>
+            Add Double Parcel details
+          </Typography> : parcel.parcelType === "Multi" ? <Typography variant="p" sx={SingledischargeHeader}>
+            Add Multi Parcel details
+          </Typography> : null}
           {/* ******************************************************************************* SINGLE PARCEL *********************************************************************** */}
           {parcel.parcelType === "Single" ? (
             <Box sx={{ width: "100%", marginBottom: "20px" }}>
-              <Typography variant="p" sx={SingledischargeHeader}>
-                Add Single Parcel Details
-              </Typography>
+
               <Stepper
                 style={{ width: "100%" }}
                 activeStep={currentStep}
@@ -339,7 +311,7 @@ const add = () => {
                 <Step>
                   <StepLabel></StepLabel>
                 </Step>
-                
+
               </Stepper>
               {showStep(currentStep)}
             </Box>
@@ -349,9 +321,7 @@ const add = () => {
           {/* *******************************************************************************DOUBLE TYPE *********************************************************************** */}
           {parcel.parcelType === "Double" ? (
             <Box sx={{ width: "100%", marginBottom: "20px" }}>
-              <Typography variant="p" sx={SingledischargeHeader}>
-                Add Single Parcel Details
-              </Typography>
+
               <Stepper
                 style={{ width: "100%" }}
                 activeStep={currentStep}

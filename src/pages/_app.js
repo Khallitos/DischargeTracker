@@ -3,6 +3,7 @@ import { AppProvider } from "../context/AppContext";
 import Navbar from "../components/Navbar";
 import "../styles/globalS.css";
 import Footer from "@/components/Footer";
+
 function MyApp({ Component, pageProps }) {
   return (
     <>

@@ -2,10 +2,11 @@ import express from "express";
 const router = express.Router();
 
 import {
-  singleCargoDetails,
+  singleParcelDetails,doubleParcelDetails
 
 } from "../controllers/uploadController.js";
 
-router.route("/singleCargoDetails").post(singleCargoDetails);
+router.route("/singleParcelDetails").post(singleParcelDetails);
+router.route("/doubleParcelDetails").post(doubleParcelDetails);
 
 export default router;

@@ -111,7 +111,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
-  const { username, logUserOff, token, setLocalStorage, toggleSideBar } =
+  const { username, logUserOff, token, setLocalStorage, toggleSideBar,parcel,setParcel } =
     useAppContext();
 
   const reduceSideBar = () => {
@@ -124,6 +124,10 @@ const Navbar = () => {
     window.location.reload();
   };
 
+  const setMainSelectorDefault = () => {
+    setParcel(...state,parcel.parcelType = "")
+  }
+
   return (
     <>
       <Box sx={MainBox}>
@@ -135,7 +139,7 @@ const Navbar = () => {
         </Head>
         <MenuIcon sx={MenuDesign} onClick={reduceSideBar} />
         <Box sx={{ display: "flex" }}>
-          <Link href="/">
+          <Link href="/" onClick={setMainSelectorDefault}>
             <Typography
               variant="p"
               noWrap

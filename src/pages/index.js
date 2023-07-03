@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -23,10 +23,14 @@ const dashboardDesign = {
 };
 
 const dashboard = () => {
-  const { isSideBarReduce, toggleSideBar } = useAppContext();
+  const { isSideBarReduce, toggleSideBar,isCompleted,setIsCompleted } = useAppContext();
   const reduceSideBar = () => {
     toggleSideBar();
   };
+
+  useEffect(()=>{
+    setIsCompleted(false)
+  })
 
   return (
     <Box sx={dashboardDesign}>

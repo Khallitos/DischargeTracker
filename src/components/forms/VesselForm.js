@@ -39,6 +39,8 @@ const VesselForm = () => {
     showAlert,
     parcel,
     parcelType,
+    setFinalData,
+    finalData,
   } = useAppContext();
 
   const [isBillofLading, setIsBillofLading] = useState(true);
@@ -49,9 +51,8 @@ const VesselForm = () => {
   };
 
   const VesselValidation = async (e) => {
-    
-    let vesselFormData = {
-      
+    const vesselFormData = {
+      parcelType: parcel.parcelType,
       vesselName: vesselData["vesselName"],
       productType: vesselData["productType"],
       vesselArrivalDate: vesselData["vesselArrivalDate"],
@@ -66,22 +67,35 @@ const VesselForm = () => {
     };
 
     let parcelChecker = parcel.parcelType;
-    {
-      parcelChecker === "Double"
-        ? setStep(2)
-        : parcelChecker === "Single"
-        ? setStep(3)
-        : setStep(2);
+
+    const isValid = await vesselValidationSchema.isValid(vesselFormData);
+    if(isValid) {
+      if(parcelChecker === "Double"){
+        const pushFinalData = setFinalData({
+          ...finalData,
+          ...vesselFormData,
+        });
+        setStep(2)
+      }
+      else if(parcelChecker ==="Single"){
+        const pushFinalData = setFinalData({
+          ...finalData,
+          ...vesselFormData,
+        });
+        setStep(3)
+      }
+      else{
+        setStep(2)
+      }
+  
+    } else {
+      toast.error("Invalid credentials", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     }
-    // const isValid = await vesselValidationSchema.isValid(vesselFormData);
-    // console.log(isValid);
-    // if (isValid) {
-    //   setStep(2);
-    // } else {
-    //   toast.error("Please fill the data with valid credentials", {
-    //     position: toast.POSITION.TOP_RIGHT,
-    //   });
-    // }
+
+  
+   
   };
 
   return (
@@ -125,6 +139,7 @@ const VesselForm = () => {
         margin="normal"
         required
         fullWidth
+        autoFocus
         name="vesselName"
         id="outlined-basic"
         label="Vessel Name"
